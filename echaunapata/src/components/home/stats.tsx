@@ -1,3 +1,5 @@
+import Button from "../commons/button";
+
 export default function StatsSection() {
     return (
       <section className="w-full bg-white py-16 px-4 sm:px-6 lg:px-8">
@@ -14,9 +16,7 @@ export default function StatsSection() {
               apariencia, edad o necesidades y tratamientos especiales.
             </p>
   
-            <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition-colors duration-200">
-              ¡DONAR!
-            </button>
+            <Button text="¡DONAR!" color="#4A1214" />  
           </div>
   
           {/* Stats Grid */}

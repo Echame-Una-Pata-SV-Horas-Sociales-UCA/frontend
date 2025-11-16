@@ -1,34 +1,35 @@
-import logo from '../assets/homelogo.png'
+import { Link } from 'react-router-dom'
+import logo from '../../assets/homelogo.png'
 export default function Navbar() {
     return (
       <nav className="absolute top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-sm">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
             <img src={logo} alt="logo" />
-            </div>
+            </Link>
   
             {/* Navigation Links */}
             <div className="hidden md:flex items-center gap-8">
-              <a href="#refugio" className="text-white hover:text-gray-300 transition-colors text-base">
+              <Link to="/refugio" className="text-white hover:text-gray-300 transition-colors text-base">
                 Refugio
-              </a>
-              <a href="#nosotros" className="text-white hover:text-gray-300 transition-colors text-base">
+              </Link>
+              <Link to="/nosotros" className="text-white hover:text-gray-300 transition-colors text-base">
                 Nosotros
-              </a>
-              <a href="#adopta" className="text-white hover:text-gray-300 transition-colors text-base">
+              </Link>
+              <Link to="/adopta" className="text-white hover:text-gray-300 transition-colors text-base">
                 Adopta
-              </a>
-              <a href="#apadrina" className="text-white hover:text-gray-300 transition-colors text-base">
+              </Link>
+              <Link to="/apadrina" className="text-white hover:text-gray-300 transition-colors text-base">
                 Apadrina
-              </a>
-              <a href="#hogares" className="text-white hover:text-gray-300 transition-colors text-base">
+              </Link>
+              <Link to="/hogares" className="text-white hover:text-gray-300 transition-colors text-base">
                 Hogares de acogida
-              </a>
-              <a href="#denuncia" className="text-white hover:text-gray-300 transition-colors text-base">
+              </Link>
+              <Link to="/denuncia" className="text-white hover:text-gray-300 transition-colors text-base">
                 Denuncia
-              </a>
+              </Link>
             </div>
   
             {/* CTA and User Icon */}

@@ -1,8 +1,8 @@
-import refugio from '../assets/house.svg'
-import medical from '../assets/medical_services.svg'
-import pets from '../assets/pets.svg'
-import volunteer_activism from '../assets/volunteer_activism.svg'
-import currency_exchange from '../assets/currency_exchange.svg'
+import refugio from '../../assets/house.svg'
+import medical from '../../assets/medical_services.svg'
+import pets from '../../assets/pets.svg'
+import volunteer_activism from '../../assets/volunteer_activism.svg'
+import currency_exchange from '../../assets/currency_exchange.svg'
 
 export default function QueHacemos() {
     return (

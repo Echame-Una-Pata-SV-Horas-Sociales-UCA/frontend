@@ -5,7 +5,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 export default function Footer() {
     return (
-      <footer className="bg-black text-white py-12 px-6 rounded-t-3xl">
+      <footer className="bg-black text-white py-12 px-6-3xl">
         <div className="max-w-7xl mx-auto">
           {/* Main content */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">

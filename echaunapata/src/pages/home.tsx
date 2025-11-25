@@ -33,8 +33,7 @@ export default function Home() {
      <Donation />
      <DogsGrid
        showGallery={true}
-       title="NUESTROS
-ACOGIDOS"
+       title="NUESTROS ACOGIDOS"
        description={[
          "En nuestro refugio puedes encontrar cachorros rescatados, perros mayores y perros con discapacidad, abonados o enfermos.",
          "Pero por encima de todo, todos nuestros perros son únicos y merecen una vida feliz y saludable."

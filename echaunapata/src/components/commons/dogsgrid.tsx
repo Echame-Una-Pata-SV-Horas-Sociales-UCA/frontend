@@ -1,61 +1,65 @@
 import happyDog from '../../assets/homeframe.png';
 
 interface DogsGridProps {
-  showGallery?: boolean;
   title: string;
   description: string | string[];
 }
 
-export default function DogsGrid({ showGallery = true, title, description }: DogsGridProps) {
+export default function DogsGrid({ title, description }: DogsGridProps) {
   const descriptionArray = Array.isArray(description) ? description : [description];
 
   return (
     <section className="w-full py-16 px-4 sm:px-8 lg:px-16 bg-white">
       <div className="max-w-7xl mx-auto">
-        {/* Top row - Two columns: text left, image right */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-8">
-          {/* Left side - Text content */}
-          <div className="flex flex-col justify-center">
-            <h2 className="text-4xl sm:text-5xl font-bold text-black mb-8 uppercase">
+
+        {/* Top row: text (left) + big image (right) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-0 items-center">
+          {/* Left side – text */}
+          <div className="flex flex-col justify-center max-w-md h-full">
+            <h2 className="text-4xl sm:text-5xl font-extrabold uppercase mb-6">
               {title}
             </h2>
-            {descriptionArray.map((paragraph, index) => (
+
+            {descriptionArray.map((p, i) => (
               <p
-                key={index}
-                className={`text-base sm:text-lg text-gray-700 leading-relaxed ${
-                  index < descriptionArray.length - 1 ? 'mb-6' : ''
+                key={i}
+                className={`text-gray-700 text-lg leading-relaxed ${
+                  i < descriptionArray.length - 1 ? 'mb-6' : ''
                 }`}
               >
-                {paragraph}
+                {p}
               </p>
             ))}
           </div>
 
-          {/* Right side - Main large image */}
-          <div className="w-full h-full min-h-96 lg:min-h-[500px] rounded-lg overflow-hidden">
-            <img src={happyDog} alt="Perro en el refugio" className="w-full h-full object-cover" />
+          {/* Right side – single big image occupying width of two grid columns */}
+          <div className="w-full col-span-2 lg:col-span-1">
+            <div className="w-full h-[420px] overflow-hidden">
+              <img
+                src={happyDog}
+                alt="Perro en el refugio"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
 
-        {/* Bottom row - Full width horizontal gallery with 4 images */}
-        {showGallery && (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="w-full h-48 sm:h-56 lg:h-64 rounded-lg overflow-hidden">
-              <img src={happyDog} alt="Perro rescatado 1" className="w-full h-full object-cover" />
-            </div>
-            <div className="w-full h-48 sm:h-56 lg:h-64 rounded-lg overflow-hidden">
-              <img src={happyDog} alt="Perro rescatado 2" className="w-full h-full object-cover" />
-            </div>
-            <div className="w-full h-48 sm:h-56 lg:h-64 rounded-lg overflow-hidden">
-              <img src={happyDog} alt="Perro rescatado 3" className="w-full h-full object-cover" />
-            </div>
-            <div className="w-full h-48 sm:h-56 lg:h-64 rounded-lg overflow-hidden">
-              <img src={happyDog} alt="Perro rescatado 4" className="w-full h-full object-cover" />
-            </div>
+        {/* Bottom row: 4-column gallery, no gap, no radius */}
+        <div className="mt-0 grid grid-cols-4 gap-0">
+          <div className="h-[210px] overflow-hidden">
+            <img src={happyDog} alt="Perro 1" className="w-full h-full object-cover" />
           </div>
-        )}
+          <div className="h-[210px] overflow-hidden">
+            <img src={happyDog} alt="Perro 2" className="w-full h-full object-cover" />
+          </div>
+          <div className="h-[210px] overflow-hidden">
+            <img src={happyDog} alt="Perro 3" className="w-full h-full object-cover" />
+          </div>
+          <div className="h-[210px] overflow-hidden">
+            <img src={happyDog} alt="Perro 4" className="w-full h-full object-cover" />
+          </div>
+        </div>
       </div>
     </section>
   );
 }
-  

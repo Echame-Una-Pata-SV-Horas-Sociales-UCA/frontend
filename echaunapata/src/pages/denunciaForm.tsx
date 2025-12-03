@@ -62,6 +62,7 @@ export default function DenunciaForm() {
 
 
 <ExpandableSection title="Tipo de denuncia">
+              <div className="grid grid-cols-1 sm:grid-cols-1 gap-8 ">
 
   <div className="w-full flex items-center justify-between py-4">
 
@@ -92,14 +93,15 @@ export default function DenunciaForm() {
     </div>
 
   </div>
-
+                <InputField placeholder="Dirección" icon="MapOutlined" />
+</div>
 </ExpandableSection>
 
 
             {/* OBSERVACIONES */}
             <ObservationsField
-              title="Observaciones *"
-              description="Comparte cualquier información adicional que consideres importante sobre el caso, el animal o la situación que estás reportando."
+              title="Descripción *"
+              description="Comparte cualquier información adicional que consideres importante sobre tu denuncia, la situación actual o cualquier detalle relevante para evaluar tu denuncia."
             />
 
 

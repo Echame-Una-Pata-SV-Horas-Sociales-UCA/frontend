@@ -61,7 +61,7 @@ export default function PerrosDisponibles() {
                     className="flex items-center gap-2 bg-[#F23413] hover:bg-[#d62b10] text-white text-sm font-semibold px-5 py-2 rounded-full shadow-md"
                   >
                     Adoptar
-                    <Pets fontSize="small" />
+                    <Pets fontSize="small" />|
                   </Link> */}
                 <Link
                   to="/animal"

@@ -1,7 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-
-
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
 import CambioSection from "../components/adopta/cambioSection";

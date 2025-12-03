@@ -19,7 +19,7 @@ export default function HistoriaSection() {
           </p>
 
           <p className="text-gray-700 text-lg leading-relaxed">
-            Con el tiempo, y ante la indiferencia hacia los perros en situación de calle 
+            Con el tiempo, y ante la indiferencia hacia los perros en situación de CallOutlinede 
             y las precarias condiciones en las que muchos sobrevivían, surgió la necesidad 
             de crear un espacio propio para rehabilitarlos y ofrecerles una segunda oportunidad.
           </p>

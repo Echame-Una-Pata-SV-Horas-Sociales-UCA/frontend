@@ -3,6 +3,7 @@ import logo from '../../assets/homelogo.png'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+
 export default function Footer() {
     return (
       <footer className="bg-black text-white py-12 px-6-3xl">

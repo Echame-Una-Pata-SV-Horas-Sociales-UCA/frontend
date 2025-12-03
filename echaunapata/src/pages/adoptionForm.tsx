@@ -14,7 +14,6 @@ export default function AdoptionForm() {
   const { state } = useLocation();
   const animal = state?.animal || {};
 
-  // ⬅ ESTA ES LA LÓGICA NUEVA (scroll top)
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -38,29 +37,29 @@ export default function AdoptionForm() {
 
             <ExpandableSection title="Datos de identificación y contacto del solicitante">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <InputField placeholder="Nombres" icon="Person" />
-                <InputField placeholder="Apellidos" icon="Person" />
-                <InputField placeholder="Dirección" icon="Home" />
-                <InputField placeholder="Ciudad" icon="Map" />
+                <InputField placeholder="Nombres" icon="PersonOutlined" />
+                <InputField placeholder="Apellidos" icon="PersonOutlined" />
+                <InputField placeholder="Dirección" icon="MapOutlined" />
+                <InputField placeholder="Ciudad" icon="MapOutlined" />
                 <InputField placeholder="Correo electrónico" icon="Email" />
-                <InputField placeholder="Teléfono" icon="Call" />
-                <InputField placeholder="DUI" icon="Badge" />
+                <InputField placeholder="Teléfono" icon="CallOutlined" />
+                <InputField placeholder="DUI" icon="BadgeOutlined" />
               </div>
             </ExpandableSection>
 
             <ExpandableSection title="Referencias personales">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <InputField placeholder="Nombres" icon="Person" />
-                <InputField placeholder="Teléfono" icon="Call" />
-                <InputField placeholder="Nombres" icon="Person" />
-                <InputField placeholder="Teléfono" icon="Call" />
+                <InputField placeholder="Nombres" icon="PersonOutlined" />
+                <InputField placeholder="Teléfono" icon="CallOutlined" />
+                <InputField placeholder="Nombres" icon="PersonOutlined" />
+                <InputField placeholder="Teléfono" icon="CallOutlined" />
               </div>
             </ExpandableSection>
 
             <ExpandableSection title="Veterinario (opcional)">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <InputField placeholder="Nombres" icon="Person" />
-                <InputField placeholder="Teléfono" icon="Call" />
+                <InputField placeholder="Nombres" icon="PersonOutlined" />
+                <InputField placeholder="Teléfono" icon="CallOutlined" />
               </div>
             </ExpandableSection>
 
@@ -68,13 +67,13 @@ export default function AdoptionForm() {
               <div className="grid grid-cols-1 sm:grid-cols-1 gap-0">
 
                 <CommitmentField
-                  icon="Home"
+                  icon="HomeOutlined"
                   question="¿Dispones de un hogar propio para vivir con tu mascota?"
                   name="casaPropia"
                 />
 
                 <CommitmentField
-                  icon="Home"
+                  icon="HomeOutlined"
                   question="¿Aceptas realizar visitas programadas por parte del refugio para verificar el bienestar del animal?"
                   name="visitas"
                 />

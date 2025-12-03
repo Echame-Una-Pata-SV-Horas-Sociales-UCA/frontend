@@ -11,7 +11,7 @@ export default function RequisitosAdopcion() {
   return (
     <section className="w-full py-16 px-4 sm:px-8 lg:px-16 bg-white">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl sm:text-5xl font-bold text-black mb-8 uppercase">
+        <h2 className="text-4xl sm:text-5xl font-bold text-black mb-8 uppercase mt-2">
           ¿CÓMO PODÉS ADOPTAR?
         </h2>
         

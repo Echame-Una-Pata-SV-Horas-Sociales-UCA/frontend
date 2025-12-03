@@ -5,6 +5,7 @@ import HistoriaSection from "../components/nosotros/historiaSection";
 import HorizontalGridSection from "../components/nosotros/horizontalgridsection";
 import CardsSection from "../components/nosotros/cardsSection";
 import ChangeSection from "../components/nosotros/changeSection";
+
 export default function Nosotros() {
   return (
      <>

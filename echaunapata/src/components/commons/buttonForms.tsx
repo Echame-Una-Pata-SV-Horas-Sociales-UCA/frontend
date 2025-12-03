@@ -1,27 +1,25 @@
 interface ButtonFormsProps {
   text: string;
-  onClick?: () => void;
+  className?: string;
 }
 
-export default function ButtonForms({ text, onClick }: ButtonFormsProps) {
+export default function ButtonForms({ text, className = "" }: ButtonFormsProps) {
   return (
-    <button
-      onClick={onClick}
-      className="
-        w-full
-        h-12
+    <div
+      className={`
         bg-blue-600
         text-white
         font-bold
         rounded-full
         hover:bg-blue-700
         transition-all
-        flex
-        items-center
-        justify-center
-      "
+        flex items-center justify-center
+        h-12 px-6
+        cursor-pointer
+        ${className}
+      `}
     >
       {text}
-    </button>
+    </div>
   );
 }

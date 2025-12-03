@@ -1,20 +1,22 @@
-import { useParams } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
+import { useEffect } from "react";
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
 import CambioSection from "../components/adopta/cambioSection";
 import ButtonForms from "../components/commons/buttonForms";
 import flecosPhoto from "../assets/flecos.png";
 
-import { CrueltyFree } from "@mui/icons-material";
-import { Pets } from "@mui/icons-material";
-import { MedicalServices } from "@mui/icons-material";
-import { MedicationLiquid } from "@mui/icons-material";
+import { CrueltyFree, Pets, MedicalServices, MedicationLiquid } from "@mui/icons-material";
 
 export default function AnimalDetalle() {
   const { id } = useParams();
   const { state } = useLocation();
-  const perro = state?.perro; 
+  const perro = state?.perro;
+
+  // SCROLL TO TOP
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const animal = {
     name: perro?.nombre || "Flecos",
@@ -86,18 +88,19 @@ export default function AnimalDetalle() {
                 {animal.description}
               </p>
 
-              <ButtonForms text="LLENAR SOLICITUD DE ADOPCIÓN" />
+            <Link to="/adoption-form" >
+            <ButtonForms text="LLENAR SOLICITUD DE ADOPCIÓN" className="w-full" />
+          </Link>
+
             </div>
           </div>
 
-          {/* DETALLES - HORIZONTAL EXACTO */}
           <div className="mt-20">
             <h3 className="text-xl font-bold mb-10">
               Más detalles de {animal.name}
             </h3>
 
             <div className="flex justify-between items-start divide-x divide-gray-200">
-
               {animal.details.map((detail, index) => (
                 <div
                   key={index}
@@ -113,7 +116,6 @@ export default function AnimalDetalle() {
                   <p className="text-gray-600 text-sm">{detail.value}</p>
                 </div>
               ))}
-
             </div>
           </div>
         </section>

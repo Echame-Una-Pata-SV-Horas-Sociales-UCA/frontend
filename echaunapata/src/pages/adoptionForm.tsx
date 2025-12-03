@@ -24,7 +24,7 @@ export default function AdoptionForm() {
           <p className="text-center text-gray-600 mb-10 text-2xl">
             Flecos
           </p>
-      <div className="gap-4 flex flex-col">
+      <div className="gap-4 flex flex-col items-center">
           {/* EXPANDABLE FORM SECTION 1 */}
           <ExpandableSection title="Datos de identificación y contacto del solicitante">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -96,7 +96,7 @@ export default function AdoptionForm() {
           description="Comparte cualquier información adicional que consideres importante sobre tu experiencia con mascotas, tu situación actual en el hogar o cualquier detalle relevante para evaluar tu solicitud de adopción."
         />
 
-        <ButtonForms text="ENVIAR SOLICITUD DE ADOPCIÓN" />
+            <ButtonForms text="ENVIAR SOLICITUD DE ADOPCIÓN" className="w-lg" />
       
       </div>
         </section>

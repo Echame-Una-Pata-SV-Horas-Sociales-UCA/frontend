@@ -12,7 +12,7 @@ import Button from "../components/commons/button";
 export default function Home() {
   return (
     <div>
-     <Navbar />
+     <Navbar solid={false} />
      <Hero>
        <div className="max-w-2xl">
          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">

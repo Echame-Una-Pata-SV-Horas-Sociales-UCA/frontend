@@ -1,7 +1,9 @@
-import happyDog from '../../assets/homeframe.png';
+import happyDog from '../../assets/flecos.png';
 import { Pets } from '@mui/icons-material';
+import { Link } from "react-router-dom";
 
 interface Perro {
+  id: string;
   nombre: string;
   genero: string;
   imagen?: string;
@@ -9,9 +11,9 @@ interface Perro {
 
 export default function PerrosDisponibles() {
   const perros: Perro[] = [
-    { nombre: "Flecos", genero: "Macho" },
-    { nombre: "Flecos", genero: "Macho" },
-    { nombre: "Flecos", genero: "Macho" },
+    { id: "1", nombre: "Flecos", genero: "Macho" },
+    { id: "2", nombre: "Luna", genero: "Hembra" },
+    { id: "3", nombre: "Tubby", genero: "Macho" },
   ];
 
   return (
@@ -23,9 +25,9 @@ export default function PerrosDisponibles() {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {perros.map((perro, index) => (
+          {perros.map((perro) => (
             <div
-              key={index}
+              key={perro.id}
               className="w-full border border-gray-300 rounded-2xl overflow-hidden bg-white shadow-md"
             >
               {/* Image */}
@@ -40,7 +42,6 @@ export default function PerrosDisponibles() {
               {/* Content */}
               <div className="p-5">
 
-                {/* Name + Button (button vertically centered vs text) */}
                 <div className="flex justify-between items-center">
 
                   {/* Text column */}
@@ -54,10 +55,29 @@ export default function PerrosDisponibles() {
                   </div>
 
                   {/* Adopt button */}
-                  <button className="flex items-center gap-2 bg-[#F23413] hover:bg-[#d62b10] text-white text-sm font-semibold px-5 py-2 rounded-full shadow-md">
+                {/*   <Link
+                    to={`/adopta/${perro.id}`}
+                    state={{ perro }}
+                    className="flex items-center gap-2 bg-[#F23413] hover:bg-[#d62b10] text-white text-sm font-semibold px-5 py-2 rounded-full shadow-md"
+                  >
                     Adoptar
                     <Pets fontSize="small" />
-                  </button>
+                  </Link> */}
+                <Link
+                  to="/animal"
+                  state={{
+                    animal: {
+                      name: perro.nombre,    // tu mock actual
+                      sex: perro.genero,
+                      age: "3 meses",
+                      photo: happyDog
+                    }
+                  }}
+                  className="flex items-center gap-2 bg-[#F23413] hover:bg-[#d62b10] text-white text-sm font-semibold px-5 py-2 rounded-full shadow-md"
+                >
+                  Adoptar
+                  <Pets fontSize="small" />
+                </Link>
 
                 </div>
 

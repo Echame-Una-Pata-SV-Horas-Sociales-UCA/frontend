@@ -4,7 +4,7 @@ import Home from './pages/home'
 import Nosotros from './pages/nosotros'
 import Adopta from './pages/adopta'
 import Apadrina from './pages/apadrina'
-
+import AnimalDetalle from './pages/animalDetalle'
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
         <Route path="/adopta" element={<Adopta />} />
         <Route path="/apadrina" element={<Apadrina />} />
         <Route path="/refugio" element={<Home />} />
+        <Route path="/animal" element={<AnimalDetalle />} /> 
       </Routes>
     </BrowserRouter>
   )

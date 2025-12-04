@@ -14,6 +14,8 @@ export default function Navbar({ solid = false }: NavbarProps) {
       className={
         solid
           ? "fixed top-0 left-0 right-0 z-50 bg-black shadow-sm"
+          : open
+          ? "fixed top-0 left-0 right-0 z-50 bg-black" // ← MENU ABIERTO = SIEMPRE NEGRO
           : "absolute top-0 left-0 right-0 z-50 bg-black md:bg-black/40 backdrop-blur-sm"
       }
     >
@@ -25,7 +27,7 @@ export default function Navbar({ solid = false }: NavbarProps) {
             <img src={logo} alt="logo" className="w-20" />
           </Link>
 
-          {/* -------- DESKTOP MENU -------- */}
+          {/* Desktop menu */}
           <div className="hidden md:flex items-center gap-8">
             <Link to="/refugio" className="text-white hover:text-gray-300">Refugio</Link>
             <Link to="/nosotros" className="text-white hover:text-gray-300">Nosotros</Link>
@@ -41,7 +43,7 @@ export default function Navbar({ solid = false }: NavbarProps) {
             </button>
           </div>
 
-          {/* -------- MOBILE HAMBURGER -------- */}
+          {/* Mobile hamburger */}
           <button
             className="md:hidden text-white focus:outline-none"
             onClick={() => setOpen(true)}
@@ -59,7 +61,7 @@ export default function Navbar({ solid = false }: NavbarProps) {
         </div>
       </div>
 
-      {/* -------- OVERLAY -------- */}
+      {/* OVERLAY */}
       {open && (
         <div
           className="fixed inset-0 bg-black/90 z-[60]"
@@ -67,14 +69,13 @@ export default function Navbar({ solid = false }: NavbarProps) {
         />
       )}
 
-      {/* -------- MOBILE PANEL -------- */}
+      {/* MENU MOBILE */}
       <div
         className={`fixed top-0 right-0 h-full 
         w-full sm:w-80 bg-black text-white 
         z-[70] shadow-xl transform transition-transform duration-300
         ${open ? "translate-x-0" : "translate-x-full"}`}
       >
-        {/* Close button */}
         <div className="flex justify-end p-4">
           <button onClick={() => setOpen(false)}>
             <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -83,7 +84,6 @@ export default function Navbar({ solid = false }: NavbarProps) {
           </button>
         </div>
 
-        {/* Links */}
         <nav className="flex flex-col gap-6 px-6 text-xl">
           <Link to="/refugio" onClick={() => setOpen(false)}>Refugio</Link>
           <Link to="/nosotros" onClick={() => setOpen(false)}>Nosotros</Link>

@@ -52,6 +52,7 @@ export default function AdoptionForm() {
 
     // ID del animal (lo pasas por state)
     animalId: "",
+    observations:""
   };
 
   const { formValues, InputChange } = useForm<AdoptionFormData>(initialForm);

@@ -48,7 +48,6 @@ export default function ImpactSection() {
   const PRIMARY = "#2D6FF7";
   const PRIMARY_LIGHT = "#B0D0FF";
   const TEXT = "#1A1A1A";
-  const RED = "#FF4D4D";
 
   return (
     <section className="w-full py-20 bg-white">

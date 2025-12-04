@@ -1,6 +1,7 @@
 import happyDog from '../../assets/homeframe.png';
 
 interface DogsGridProps {
+  showGallery?: boolean;
   title: string;
   description: string | string[];
 }

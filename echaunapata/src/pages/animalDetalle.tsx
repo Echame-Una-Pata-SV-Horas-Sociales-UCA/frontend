@@ -9,7 +9,7 @@ import flecosPhoto from "../assets/flecos.png";
 import { CrueltyFree, Pets, MedicalServices, MedicationLiquid } from "@mui/icons-material";
 
 export default function AnimalDetalle() {
-  const { id } = useParams();
+  const {  } = useParams();
   const { state } = useLocation();
   const perro = state?.perro;
 

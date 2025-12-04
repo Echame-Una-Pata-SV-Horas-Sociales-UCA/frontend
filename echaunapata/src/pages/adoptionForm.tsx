@@ -11,8 +11,26 @@ import ButtonForms from "../components/commons/buttonForms";
 import { useForm } from "../hooks/useForm.ts";
 import { CreateAdoption } from "../service/AdoptionService.ts";
 
+interface AdoptionFormData {
+  firstNames: string;
+  lastNames: string;
+  address: string;
+  city: string;
+  email: string;
+  phoneNumber: string;
+  dui: string;
+  ref1_name: string;
+  ref1_phone: string;
+  ref2_name: string;
+  ref2_phone: string;
+  veterinarianName: string;
+  veterinarianPhone: string;
+  observations: string;
+  animalId: string;
+}
+
 export default function AdoptionForm() {
-  const initialForm = {
+  const initialForm: AdoptionFormData = {
     // Datos personales
     firstNames: "",
     lastNames: "",
@@ -36,7 +54,7 @@ export default function AdoptionForm() {
     animalId: "",
   };
 
-  const { formValues, InputChange } = useForm(initialForm);
+  const { formValues, InputChange } = useForm<AdoptionFormData>(initialForm);
 
   const [ownHome, setOwnHome] = useState<boolean | null>(null);
   const [acceptsVisits, setAcceptsVisits] = useState<boolean | null>(null);

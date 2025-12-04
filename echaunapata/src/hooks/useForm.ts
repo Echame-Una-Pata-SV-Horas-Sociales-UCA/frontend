@@ -1,26 +1,25 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-export const useForm = (initForm = {}) => {
+export const useForm = <T extends Record<string, any>>(initForm: T) => {
+  const [formValues, setFormValues] = useState<T>(initForm);
 
-    const [formValues, setFormValues] = useState(initForm);
+  const InputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
 
-    const InputChange = (e:any)=>{
-        const {name, value} = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    });
+  };
 
-        setFormValues({
-            ...formValues,
-            [name]: value
-        });
-    }
+  const resetForm = () => {
+    setFormValues(initForm); // no {initForm}, solo initForm
+  };
 
-    const resetForm = () => {
-        setFormValues({initForm});
-    }
-
-    return {
-        ...formValues,
-        formValues,
-        InputChange,
-        resetForm
-    };
-}
+  return {
+    ...formValues,
+    formValues,
+    InputChange,
+    resetForm,
+  };
+};

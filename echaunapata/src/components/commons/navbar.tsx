@@ -14,18 +14,18 @@ export default function Navbar({ solid = false }: NavbarProps) {
       className={
         solid
           ? "fixed top-0 left-0 right-0 z-50 bg-black shadow-sm"
-          : "absolute top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-sm"
+          : "absolute top-0 left-0 right-0 z-50 bg-black md:bg-black/40 backdrop-blur-sm"
       }
     >
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+      <div className="w-full px-4 sm:px-6 py-4">
+        <div className="flex items-center justify-between w-full">
 
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <img src={logo} alt="logo" className="w-20" />
           </Link>
 
-          {/* -------- MENU DESKTOP -------- */}
+          {/* -------- DESKTOP MENU -------- */}
           <div className="hidden md:flex items-center gap-8">
             <Link to="/refugio" className="text-white hover:text-gray-300">Refugio</Link>
             <Link to="/nosotros" className="text-white hover:text-gray-300">Nosotros</Link>
@@ -34,24 +34,14 @@ export default function Navbar({ solid = false }: NavbarProps) {
             <Link to="/denuncia" className="text-white hover:text-gray-300">Denuncia</Link>
           </div>
 
-          {/* Botón Donar + Usuario (solo desktop) */}
+          {/* Desktop buttons */}
           <div className="hidden md:flex items-center gap-4">
             <button className="border-2 border-white text-white px-6 py-2 rounded-full hover:bg-white hover:text-black transition-all font-semibold">
               ¡Donar!
             </button>
-            <button className="text-white hover:text-gray-300">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                />
-              </svg>
-            </button>
           </div>
 
-          {/* -------- HAMBURGUER MENU (mobile) -------- */}
+          {/* -------- MOBILE HAMBURGER -------- */}
           <button
             className="md:hidden text-white focus:outline-none"
             onClick={() => setOpen(true)}
@@ -69,14 +59,19 @@ export default function Navbar({ solid = false }: NavbarProps) {
         </div>
       </div>
 
-      {/* -------- MOBILE MENU OVERLAY -------- */}
+      {/* -------- OVERLAY -------- */}
       {open && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40" onClick={() => setOpen(false)} />
+        <div
+          className="fixed inset-0 bg-black/90 z-[60]"
+          onClick={() => setOpen(false)}
+        />
       )}
 
-      {/* -------- MOBILE MENU PANEL -------- */}
+      {/* -------- MOBILE PANEL -------- */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-black text-white z-50 shadow-xl transform transition-transform duration-300 
+        className={`fixed top-0 right-0 h-full 
+        w-full sm:w-80 bg-black text-white 
+        z-[70] shadow-xl transform transition-transform duration-300
         ${open ? "translate-x-0" : "translate-x-full"}`}
       >
         {/* Close button */}
@@ -89,7 +84,7 @@ export default function Navbar({ solid = false }: NavbarProps) {
         </div>
 
         {/* Links */}
-        <nav className="flex flex-col gap-6 px-6 text-lg">
+        <nav className="flex flex-col gap-6 px-6 text-xl">
           <Link to="/refugio" onClick={() => setOpen(false)}>Refugio</Link>
           <Link to="/nosotros" onClick={() => setOpen(false)}>Nosotros</Link>
           <Link to="/adopta" onClick={() => setOpen(false)}>Adopta</Link>

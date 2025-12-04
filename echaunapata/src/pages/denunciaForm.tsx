@@ -8,6 +8,7 @@ import InputField from "../components/forms/inputField";
 import CommitmentField from "../components/forms/commitmentField";
 import ObservationsField from "../components/forms/observationsField";
 import ButtonForms from "../components/commons/buttonForms";
+import FileUploadField from "../components/forms/fileUploadField";
 
 export default function DenunciaForm() {
 
@@ -92,18 +93,22 @@ export default function DenunciaForm() {
 
     </div>
 
-  </div>
-                <InputField placeholder="Dirección" icon="MapOutlined" />
-</div>
+        </div>
+          <InputField placeholder="Dirección" icon="MapOutlined" />
+          <InputField placeholder="Link de la dirección" icon="LinkOutlined" />
+
+      </div>
 </ExpandableSection>
 
+           <ExpandableSection title="Evidencia">
+  
+          <FileUploadField onFileSelect={(file) => console.log("Archivo:", file)} />
 
-            {/* OBSERVACIONES */}
-            <ObservationsField
-              title="Descripción *"
-              description="Comparte cualquier información adicional que consideres importante sobre tu denuncia, la situación actual o cualquier detalle relevante para evaluar tu denuncia."
-            />
-
+          <ObservationsField
+            title="Descripción *"
+            description="Comparte cualquier información adicional que consideres importante sobre tu denuncia, la situación actual o cualquier detalle relevante."
+          />
+            </ExpandableSection>
 
             {/* BOTÓN (CORREGIDO) */}
             <ButtonForms 
@@ -120,3 +125,4 @@ export default function DenunciaForm() {
     </>
   );
 }
+ 

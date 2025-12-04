@@ -10,6 +10,7 @@ import ObservationsField from "../components/forms/observationsField";
 import ButtonForms from "../components/commons/buttonForms";
 import { useForm } from "../hooks/useForm.ts";
 import { CreateAdoption } from "../service/AdoptionService";
+import { notifyError, notifySuccess } from "../components/utils/toastUtils";
 
 interface AdoptionFormData {
   firstNames: string;
@@ -31,7 +32,6 @@ interface AdoptionFormData {
 
 export default function AdoptionForm() {
   const initialForm: AdoptionFormData = {
-    // Datos personales
     firstNames: "",
     lastNames: "",
     email: "",
@@ -39,38 +39,103 @@ export default function AdoptionForm() {
     dui: "",
     address: "",
     city: "",
-
-    // Veterinario
     veterinarianName: "",
     veterinarianPhone: "",
-
-    // Referencias personales
     ref1_name: "",
     ref1_phone: "",
     ref2_name: "",
     ref2_phone: "",
-
-    // ID del animal (lo pasas por state)
+    observations: "",
     animalId: "",
-    observations:""
   };
 
-  const { formValues, InputChange } = useForm<AdoptionFormData>(initialForm);
+  const { formValues, InputChange, resetForm } =
+    useForm<AdoptionFormData>(initialForm);
 
   const [ownHome, setOwnHome] = useState<boolean | null>(null);
   const [acceptsVisits, setAcceptsVisits] = useState<boolean | null>(null);
-  const [commitmentToSterilization, setCommitmentToSterilization] = useState<
-    boolean | null
-  >(null);
-  const [commitmentToSendPhotos, setCommitmentToSendPhotos] = useState<
-    boolean | null
-  >(null);
+  const [commitmentToSterilization, setCommitmentToSterilization] = useState<boolean | null>(null);
+  const [commitmentToSendPhotos, setCommitmentToSendPhotos] = useState<boolean | null>(null);
 
+  const [loading, setLoading] = useState(false);
+
+  const { state } = useLocation();
+  const animal = state?.animal || {};
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // -------------------------
+  // VALIDACIONES
+  // -------------------------
+  const validateForm = () => {
+    if (formValues.firstNames.trim().length < 2)
+      return notifyError("Ingrese su nombre correctamente");
+
+    if (formValues.lastNames.trim().length < 2)
+      return notifyError("Ingrese sus apellidos correctamente");
+
+    if (!formValues.email.includes("@"))
+      return notifyError("Ingrese un correo válido");
+
+    if (!/^\d{8,}$/.test(formValues.phoneNumber))
+      return notifyError("Ingrese un teléfono válido");
+
+    if (!/^\d{8}-\d$/.test(formValues.dui))
+      return notifyError("El DUI debe tener el formato 00000000-0");
+
+    if (!formValues.address.trim())
+      return notifyError("La dirección es obligatoria");
+
+    if (!formValues.city.trim())
+      return notifyError("La ciudad es obligatoria");
+
+    // Referencias
+    if (!formValues.ref1_name.trim())
+      return notifyError("Ingrese la primera referencia");
+
+    if (!/^\d{8,}$/.test(formValues.ref1_phone))
+      return notifyError("Teléfono de referencia 1 inválido");
+
+    if (!formValues.ref2_name.trim())
+      return notifyError("Ingrese la segunda referencia");
+
+    if (!/^\d{8,}$/.test(formValues.ref2_phone))
+      return notifyError("Teléfono de referencia 2 inválido");
+
+    // Compromisos
+    if (ownHome === null)
+      return notifyError("Debe indicar si dispone de hogar propio");
+
+    if (acceptsVisits === null)
+      return notifyError("Debe indicar si acepta visitas");
+
+    if (commitmentToSterilization === null)
+      return notifyError("Debe aceptar el compromiso de esterilización");
+
+    if (commitmentToSendPhotos === null)
+      return notifyError("Debe aceptar enviar fotos periódicas");
+
+    if (formValues.observations.trim().length < 10)
+      return notifyError("Las observaciones deben tener mínimo 10 caracteres");
+
+    return true;
+  };
+
+  // -------------------------
+  // SUBMIT
+  // -------------------------
   const handleSubmit = async () => {
+    if (!validateForm()) return;
+
+    setLoading(true);
+
     const payload = {
-      veterinarianName: formValues.veterinarianName,
-      veterinarianPhone: formValues.veterinarianPhone,
-      animalId: "3a4920dd-f5b2-4b3b-8aac-6135f2e49ef0",
+      veterinarianName: formValues.veterinarianName || null,
+      veterinarianPhone: formValues.veterinarianPhone || null,
+
+      animalId: animal.id, // ← si viene del state, úsalo
       ownHome,
       acceptsVisits,
       commitmentToSterilization,
@@ -96,23 +161,25 @@ export default function AdoptionForm() {
           phone: formValues.ref2_phone,
         },
       ],
+      observations: formValues.observations,
     };
 
-    console.log("PAYLOAD PARA BACKEND:", payload);
     try {
-      const response = await CreateAdoption(payload);
-      console.log("Solicitud enviada:", response);
+      await CreateAdoption(payload);
+      notifySuccess("Solicitud enviada con éxito");
+
+      resetForm();
+      setOwnHome(null);
+      setAcceptsVisits(null);
+      setCommitmentToSterilization(null);
+      setCommitmentToSendPhotos(null);
     } catch (error) {
-      console.error("Error enviando solicitud", error);
+      console.error(error);
+      notifyError("Error al enviar solicitud");
+    } finally {
+      setLoading(false);
     }
   };
-
-  const { state } = useLocation();
-  const animal = state?.animal || {};
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <>
@@ -129,164 +196,70 @@ export default function AdoptionForm() {
           </p>
 
           <div className="gap-4 flex flex-col items-center">
+
+            {/* DATOS PERSONALES */}
             <ExpandableSection title="Datos de identificación y contacto del solicitante">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <InputField
-                  placeholder="Nombres"
-                  icon="PersonOutlined"
-                  name="firstNames"
-                  value={formValues.firstNames}
-                  onChange={InputChange}
-                />
-                <InputField
-                  placeholder="Apellidos"
-                  icon="PersonOutlined"
-                  name="lastNames"
-                  value={formValues.lastNames}
-                  onChange={InputChange}
-                />{" "}
-                <InputField
-                  placeholder="Dirección"
-                  icon="MapOutlined"
-                  name="address"
-                  value={formValues.address}
-                  onChange={InputChange}
-                />
-                <InputField
-                  placeholder="Ciudad"
-                  icon="MapOutlined"
-                  name="city"
-                  value={formValues.city}
-                  onChange={InputChange}
-                />
-                <InputField
-                  placeholder="Correo electrónico"
-                  icon="Email"
-                  name="email"
-                  value={formValues.email}
-                  onChange={InputChange}
-                />
-                <InputField
-                  placeholder="Teléfono"
-                  icon="CallOutlined"
-                  name="phoneNumber"
-                  value={formValues.phoneNumber}
-                  onChange={InputChange}
-                />
-                <InputField
-                  placeholder="DUI"
-                  icon="BadgeOutlined"
-                  name="dui"
-                  value={formValues.dui}
-                  onChange={InputChange}
-                />
+                <InputField placeholder="Nombres" icon="PersonOutlined" name="firstNames" value={formValues.firstNames} onChange={InputChange} />
+                <InputField placeholder="Apellidos" icon="PersonOutlined" name="lastNames" value={formValues.lastNames} onChange={InputChange} />
+
+                <InputField placeholder="Dirección" icon="MapOutlined" name="address" value={formValues.address} onChange={InputChange} />
+                <InputField placeholder="Ciudad" icon="MapOutlined" name="city" value={formValues.city} onChange={InputChange} />
+
+                <InputField placeholder="Correo electrónico" icon="Email" name="email" value={formValues.email} onChange={InputChange} />
+                <InputField placeholder="Teléfono" icon="CallOutlined" name="phoneNumber" value={formValues.phoneNumber} onChange={InputChange} />
+
+                <InputField placeholder="DUI" icon="BadgeOutlined" name="dui" value={formValues.dui} onChange={InputChange} />
               </div>
             </ExpandableSection>
 
+            {/* REFERENCIAS */}
             <ExpandableSection title="Referencias personales">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <InputField
-                  placeholder="Nombres"
-                  icon="PersonOutlined"
-                  name="ref1_name"
-                  value={formValues.ref1_name}
-                  onChange={InputChange}
-                />
-                <InputField
-                  placeholder="Teléfono"
-                  icon="CallOutlined"
-                  name="ref1_phone"
-                  value={formValues.ref1_phone}
-                  onChange={InputChange}
-                />
-                <InputField
-                  placeholder="Nombres"
-                  icon="PersonOutlined"
-                  name="ref2_name"
-                  value={formValues.ref2_name}
-                  onChange={InputChange}
-                />
-                <InputField
-                  placeholder="Teléfono"
-                  icon="CallOutlined"
-                  name="ref2_phone"
-                  value={formValues.ref2_phone}
-                  onChange={InputChange}
-                />
+                <InputField placeholder="Nombres" icon="PersonOutlined" name="ref1_name" value={formValues.ref1_name} onChange={InputChange} />
+                <InputField placeholder="Teléfono" icon="CallOutlined" name="ref1_phone" value={formValues.ref1_phone} onChange={InputChange} />
+
+                <InputField placeholder="Nombres" icon="PersonOutlined" name="ref2_name" value={formValues.ref2_name} onChange={InputChange} />
+                <InputField placeholder="Teléfono" icon="CallOutlined" name="ref2_phone" value={formValues.ref2_phone} onChange={InputChange} />
               </div>
             </ExpandableSection>
 
+            {/* VETERINARIO */}
             <ExpandableSection title="Veterinario (opcional)">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <InputField
-                  placeholder="Nombres"
-                  icon="PersonOutlined"
-                  name="veterinarianName"
-                  value={formValues.veterinarianName}
-                  onChange={InputChange}
-                />
-                <InputField
-                  placeholder="Teléfono"
-                  icon="CallOutlined"
-                  name="veterinarianPhone"
-                  value={formValues.veterinarianPhone}
-                  onChange={InputChange}
-                />
+                <InputField placeholder="Nombres" icon="PersonOutlined" name="veterinarianName" value={formValues.veterinarianName} onChange={InputChange} />
+                <InputField placeholder="Teléfono" icon="CallOutlined" name="veterinarianPhone" value={formValues.veterinarianPhone} onChange={InputChange} />
               </div>
             </ExpandableSection>
 
+            {/* COMPROMISOS */}
             <ExpandableSection title="Compromisos">
-              <div className="grid grid-cols-1 sm:grid-cols-1 gap-0">
-                <CommitmentField
-                  icon="HomeOutlined"
-                  question="¿Dispones de un hogar propio para vivir con tu mascota?"
-                  name="ownHome"
-                  value={ownHome}
-                  onChange={(e) => setOwnHome(e.target.value === "true")}
-                />
+              <div className="grid grid-cols-1">
+                <CommitmentField icon="HomeOutlined" question="¿Dispones de un hogar propio para vivir con tu mascota?" name="ownHome" value={ownHome} onChange={(e) => setOwnHome(e.target.value === "true")} />
 
-                <CommitmentField
-                  icon="HomeOutlined"
-                  question="¿Aceptas realizar visitas programadas por parte del refugio para verificar el bienestar del animal?"
-                  name="acceptsVisits"
-                  value={acceptsVisits}
-                  onChange={(e) => setAcceptsVisits(e.target.value === "true")}
-                />
+                <CommitmentField icon="HomeOutlined" question="¿Aceptas realizar visitas programadas por parte del refugio para verificar el bienestar del animal?" name="acceptsVisits" value={acceptsVisits} onChange={(e) => setAcceptsVisits(e.target.value === "true")} />
 
-                <CommitmentField
-                  icon="VolunteerActivism"
-                  question="¿Te comprometes a esterilizar al animal en el momento adecuado, según las indicaciones del refugio y el veterinario?"
-                  name="commitmentToSterilization"
-                  value={commitmentToSterilization}
-                  onChange={(e) =>
-                    setCommitmentToSterilization(e.target.value === "true")
-                  }
-                />
+                <CommitmentField icon="VolunteerActivism" question="¿Te comprometes a esterilizar al animal en el momento adecuado?" name="commitmentToSterilization" value={commitmentToSterilization} onChange={(e) => setCommitmentToSterilization(e.target.value === "true")} />
 
-                <CommitmentField
-                  icon="AddAPhotoOutlined"
-                  question="¿Te comprometes a enviar fotografías periódicas del animal para dar seguimiento a su bienestar?"
-                  name="commitmentToSendPhotos"
-                  value={commitmentToSendPhotos}
-                  onChange={(e) =>
-                    setCommitmentToSendPhotos(e.target.value === "true")
-                  }
-                />
+                <CommitmentField icon="AddAPhotoOutlined" question="¿Te comprometes a enviar fotografías periódicas del animal para su seguimiento?" name="commitmentToSendPhotos" value={commitmentToSendPhotos} onChange={(e) => setCommitmentToSendPhotos(e.target.value === "true")} />
               </div>
             </ExpandableSection>
 
+            {/* OBSERVACIONES */}
             <ObservationsField
               title="Observaciones *"
-              description="Comparte cualquier información adicional que consideres importante sobre tu experiencia con mascotas, tu situación actual en el hogar o cualquier detalle relevante para evaluar tu solicitud de adopción."
+              description="Comparte cualquier información adicional."
               name="observations"
               value={formValues.observations}
               onChange={InputChange}
             />
 
+            {/* BOTÓN */}
             <ButtonForms
-              text="ENVIAR SOLICITUD DE ADOPCIÓN"
+              text={loading ? "ENVIANDO…" : "ENVIAR SOLICITUD DE ADOPCIÓN"}
               className="w-lg"
               onClick={handleSubmit}
+              disabled={loading}
             />
           </div>
         </section>

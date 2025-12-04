@@ -12,7 +12,7 @@ import Button from "../components/commons/button";
 export default function Home() {
   return (
     <div>
-     <Navbar />
+     <Navbar solid={false} />
      <Hero>
        <div className="max-w-2xl">
          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
@@ -27,19 +27,20 @@ export default function Home() {
          <Button text="¡DONAR!" color="#F23413" />  
        </div>
      </Hero>
-     <QueHacemos />
      <StatsSection />
-     <CTASection />
-     <Donation />
+
      <DogsGrid
        showGallery={true}
-       title="NUESTROS
-ACOGIDOS"
+       title="NUESTROS ACOGIDOS"
        description={[
          "En nuestro refugio puedes encontrar cachorros rescatados, perros mayores y perros con discapacidad, abonados o enfermos.",
          "Pero por encima de todo, todos nuestros perros son únicos y merecen una vida feliz y saludable."
        ]}
      />
+          <QueHacemos />
+
+     <Donation />
+     <CTASection />
      <SupportSection />
      <Footer />
       </div>

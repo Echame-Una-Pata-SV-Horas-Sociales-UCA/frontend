@@ -9,7 +9,7 @@ export default function CardsSection() {
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <Card title="Rescate" description="Rescatamos perros en situación de vulnerabilidad, los rehabilitamos y buscamos para ellos un hogar responsable y amoroso." />
-                    <Card title="Rehabilitacion" description="Promovemos la tenencia responsable, la adopción consciente y la esterilización canina como pilares fundamentales para reducir la sobrepoblación y el abandono en las calles." />
+                    <Card title="Rehabilitacion" description="Promovemos la tenencia responsable, la adopción consciente y la esterilización canina como pilares fundamentales para reducir la sobrepoblación y el abandono en las CallOutlinedes." />
                 </div>
             </div>
         </section>

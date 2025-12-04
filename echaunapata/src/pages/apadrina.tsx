@@ -7,7 +7,7 @@ import MetodosDonacion from "../components/apadrina/metodosDonacion";
 export default function Apadrina() {
   return (
     <>
-      <Navbar />
+      <Navbar solid={false} />
       <Hero>
         <div className="max-w-2xl mx-auto flex flex-col items-center justify-center gap-4 text-center">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">

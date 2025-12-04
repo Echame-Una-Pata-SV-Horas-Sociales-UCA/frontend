@@ -28,8 +28,7 @@ export default function SupportSection() {
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">¿Qué puedes hacer para apoyar?</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Lorem ipsum set dolorem at met Lorem ipsum set dolorem at met Lorem ipsum set dolorem at met Lorem ipsum set
-              dolorem at met
+              Podés apoyarnos de muchas formas: donando, apadrinando o adoptando. Cada acción cuenta y nos ayuda a seguir rescatando y cuidando a más peludos que necesitan una segunda oportunidad.
             </p>
           </div>
   

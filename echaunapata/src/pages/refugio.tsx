@@ -1,5 +1,5 @@
-import Navbar from "../components/navbar";
-import Footer from "../components/footer";
+import Navbar from "../components/commons/navbar";
+import Footer from "../components/commons/footer";
 
 export default function Refugio() {
   return (

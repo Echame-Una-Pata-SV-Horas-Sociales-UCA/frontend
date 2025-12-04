@@ -2,14 +2,14 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
-import CambioSection from "../components/adopta/cambioSection.tsx";
+import CambioSection from "../components/adopta/cambioSection";
 import ExpandableSection from "../components/forms/expandableSection";
 import InputField from "../components/forms/inputField";
 import CommitmentField from "../components/forms/commitmentField";
 import ObservationsField from "../components/forms/observationsField";
 import ButtonForms from "../components/commons/buttonForms";
 import { useForm } from "../hooks/useForm.ts";
-import { CreateAdoption } from "../service/AdoptionService.ts";
+import { CreateAdoption } from "../service/AdoptionService";
 
 interface AdoptionFormData {
   firstNames: string;

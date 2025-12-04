@@ -1,4 +1,6 @@
 import ButtonForms from "../commons/buttonForms";
+import { Link } from "react-router-dom";
+
 export default function RequisitoDenuncia() {
 
   return (
@@ -22,10 +24,12 @@ Tu voz es clave para defender a quienes no pueden hacerlo por sí mismos. Juntos
         </div>
         
      <div className="flex justify-center">
-    <ButtonForms
+      <Link to="/denuncia-form" className="w-full flex justify-center">
+      <ButtonForms 
         text="LLENAR FICHA DE DENUNCIA"
         className="w-lg"
-    />
+      />
+    </Link>
     </div>
 
 

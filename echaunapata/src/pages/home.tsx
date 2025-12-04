@@ -28,7 +28,6 @@ export default function Home() {
        </div>
      </Hero>
      <StatsSection />
-          <QueHacemos />
 
      <DogsGrid
        showGallery={true}
@@ -38,6 +37,8 @@ export default function Home() {
          "Pero por encima de todo, todos nuestros perros son únicos y merecen una vida feliz y saludable."
        ]}
      />
+          <QueHacemos />
+
      <Donation />
      <CTASection />
      <SupportSection />

@@ -8,9 +8,13 @@ import AnimalDetalle from './pages/animalDetalle'
 import AdoptionForm from './pages/adoptionForm'
 import Denuncia from './pages/denuncia'
 import DenunciaForm from './pages/denunciaForm'
+import { Toaster } from "react-hot-toast";
+
 
 function App() {
   return (
+    <>
+    <Toaster position="top-right" reverseOrder={false} />
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -25,6 +29,7 @@ function App() {
         <Route path="/denuncia-form" element={<DenunciaForm />} />
       </Routes>
     </BrowserRouter>
+    </>
   )
 }
 

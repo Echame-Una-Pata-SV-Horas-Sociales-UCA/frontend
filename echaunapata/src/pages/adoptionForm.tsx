@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
-import CambioSection from "../components/adopta/cambioSection";
+import CambioSection from "../components/adopta/CambioSection.tsx";
 import ExpandableSection from "../components/forms/expandableSection";
 import InputField from "../components/forms/inputField";
 import CommitmentField from "../components/forms/commitmentField";

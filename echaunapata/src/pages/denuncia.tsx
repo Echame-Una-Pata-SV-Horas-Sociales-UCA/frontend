@@ -1,7 +1,7 @@
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
 import Hero from "../components/commons/hero";
-import CambioSection from "../components/adopta/cambioSection";
+import CambioSection from "../components/adopta/CambioSection";
 import RequisitoDenuncia from "../components/denuncia/requisitosDenuncia";
 
 export default function Denuncia() {

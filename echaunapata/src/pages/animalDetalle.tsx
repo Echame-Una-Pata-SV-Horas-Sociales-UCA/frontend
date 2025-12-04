@@ -2,7 +2,7 @@ import { useParams, useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
-import CambioSection from "../components/adopta/cambioSection";
+import CambioSection from "../components/adopta/CambioSection";
 import ButtonForms from "../components/commons/buttonForms";
 import flecosPhoto from "../assets/flecos.png";
 

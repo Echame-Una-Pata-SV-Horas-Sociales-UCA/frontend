@@ -3,7 +3,7 @@ import Footer from "../components/commons/footer";
 import Hero from "../components/commons/hero";
 import RequisitosAdopcion from "../components/adopta/requisitos";
 import PerrosDisponibles from "../components/adopta/perrosDisponibles";
-import CambioSection from "../components/adopta/cambioSection";
+import CambioSection from "../components/adopta/CambioSection";
 
 export default function Adopta() {
   return (

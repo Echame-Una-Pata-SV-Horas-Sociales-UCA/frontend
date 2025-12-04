@@ -109,7 +109,6 @@ export default function DenunciaForm() {
             description="Comparte cualquier información adicional que consideres importante sobre tu denuncia, la situación actual o cualquier detalle relevante."
           />
             </ExpandableSection>
-
             {/* BOTÓN (CORREGIDO) */}
             <ButtonForms 
               text="ENVIAR DENUNCIA" 

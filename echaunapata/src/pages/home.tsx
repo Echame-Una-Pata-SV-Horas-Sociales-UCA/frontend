@@ -27,10 +27,9 @@ export default function Home() {
          <Button text="¡DONAR!" color="#F23413" />  
        </div>
      </Hero>
-     <QueHacemos />
      <StatsSection />
-     <CTASection />
-     <Donation />
+          <QueHacemos />
+
      <DogsGrid
        showGallery={true}
        title="NUESTROS ACOGIDOS"
@@ -39,6 +38,8 @@ export default function Home() {
          "Pero por encima de todo, todos nuestros perros son únicos y merecen una vida feliz y saludable."
        ]}
      />
+     <Donation />
+     <CTASection />
      <SupportSection />
      <Footer />
       </div>

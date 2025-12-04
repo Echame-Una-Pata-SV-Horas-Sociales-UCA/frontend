@@ -1,4 +1,6 @@
 import Button from "../commons/button";
+import GraphSection from "./graphSection";
+
 
 export default function StatsSection() {
     return (
@@ -18,35 +20,29 @@ export default function StatsSection() {
   
             <Button text="¡DONAR!" color="#4A1214" />  
           </div>
+          <GraphSection />
   
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {/* Stat 1 */}
+{/*           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="bg-white border border-gray-200 rounded-lg p-8 text-center shadow-sm hover:shadow-md transition-shadow">
               <p className="text-4xl sm:text-5xl font-bold text-red-900 mb-2">+1000</p>
               <p className="text-gray-600 text-sm sm:text-base">Perros rescatados en los últimos 15 años</p>
             </div>
-  
-            {/* Stat 2 */}
-            <div className="bg-white border border-gray-200 rounded-lg p-8 text-center shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white border border-gray-200 rounded-lg p-8 text-center shadow-sm hover:shadow-md transition-shadow">
               <p className="text-4xl sm:text-5xl font-bold text-red-900 mb-2">1000</p>
               <p className="text-gray-600 text-sm sm:text-base">Perros entregados en adopción</p>
             </div>
-  
-            {/* Stat 3 */}
             <div className="bg-white border border-gray-200 rounded-lg p-8 text-center shadow-sm hover:shadow-md transition-shadow">
               <p className="text-4xl sm:text-5xl font-bold text-red-900 mb-2">1000</p>
               <p className="text-gray-600 text-sm sm:text-base">
                 Perros actualmente alimentados y cuidados en el Santuario
               </p>
             </div>
-  
-            {/* Stat 4 */}
             <div className="bg-white border border-gray-200 rounded-lg p-8 text-center shadow-sm hover:shadow-md transition-shadow">
               <p className="text-4xl sm:text-5xl font-bold text-red-900 mb-2">+1000</p>
               <p className="text-gray-600 text-sm sm:text-base">Padrinos de todo el mundo</p>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     )

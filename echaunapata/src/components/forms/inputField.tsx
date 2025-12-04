@@ -3,9 +3,12 @@ import * as Icons from "@mui/icons-material";
 interface Props {
   placeholder: string;
   icon: keyof typeof Icons;
+  name:string;
+  value:string;
+  onChange:(e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function InputField({ placeholder, icon }: Props) {
+export default function InputField({ placeholder, icon, name, value, onChange }: Props) {
   const Icon = Icons[icon];
 
   return (
@@ -25,6 +28,9 @@ export default function InputField({ placeholder, icon }: Props) {
         <input
           type="text"
           placeholder={placeholder}
+          name={name}
+          value={value}
+          onChange={onChange}
           className="
             w-full
             pl-8                 /* espacio para el icono */

@@ -1,11 +1,18 @@
 interface ButtonFormsProps {
   text: string;
   className?: string;
+  onClick?: () => void;
 }
 
-export default function ButtonForms({ text, className = "" }: ButtonFormsProps) {
+export default function ButtonForms({
+  text,
+  className = "",
+  onClick,
+}: ButtonFormsProps) {
   return (
-    <div
+    <button
+      onClick={onClick} // ← AGREGADO
+      type="button" // ← IMPORTANTE para evitar submit automático
       className={`
         bg-blue-600
         text-white
@@ -20,6 +27,6 @@ export default function ButtonForms({ text, className = "" }: ButtonFormsProps) 
       `}
     >
       {text}
-    </div>
+    </button>
   );
 }

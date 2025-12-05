@@ -2,6 +2,7 @@
 node_modules/
 dist/
 dist-ssr/
+.vite/
 *.local
 
 # Logs
@@ -16,58 +17,37 @@ lerna-debug.log*
 # OS generated files
 .DS_Store
 Thumbs.db
+.AppleDouble/
+.LSOverride
+Desktop.ini
+$RECYCLE.BIN/
 
 # Editor directories and files
 .vscode/
 !.vscode/extensions.json
 .idea/
+.history/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.iml
 
 # TypeScript
 *.tsbuildinfo
 
-# Vite
-.vite/
-
 # Coverage
 coverage/
 
-# Misc
+# Env files
 .env*
 .env.*.local
-
-# JetBrains IDEs
-.idea/
-*.iml
-
-# VSCode
-.history/
-
-# npm
-package-lock.json
-
-# yarn
-yarn.lock
-
-# pnpm
-pnpm-lock.yaml
-
-# Mac system files
-.AppleDouble/
-.LSOverride
-
-# Windows system files
-Desktop.ini
-$RECYCLE.BIN/
 
 # React Native
 .expo/
 
-# Optional: Uncomment if you use storybook
+# Optional: Uncomment if you use Storybook
 # .storybook-static/
 
 # Optional: Uncomment if you use Cypress
@@ -77,5 +57,3 @@ $RECYCLE.BIN/
 # Optional: Uncomment if you use Playwright
 # test-results/
 # playwright-report/
-
-# End of file

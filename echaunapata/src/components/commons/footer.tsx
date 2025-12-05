@@ -82,7 +82,7 @@ export default function Footer() {
           {/* Copyright and Dedicatory */}
           <div className="border-t border-gray-700 pt-8 text-center text-xs text-gray-400">
             <p>ÉCHAME UNA PATA SV © 2025. TODOS LOS DERECHOS RESERVADOS</p>
-            <p className="mt-2 italic text-gray-500">En memoria de Shakira Eguizábal, siempre en nuestros corazones.</p>
+            <p className="mt-2 italic text-gray-500">En memoria de Shakira Eguizábal.</p>
           </div>
         </div>
       </footer>

@@ -16,8 +16,15 @@ import {
   Line,
 } from "recharts";
 
+interface ImpactData {
+  perrosEnSantuario: number;
+  padrinosGlobales: number;
+  rescatesPorAno: Record<string, number>;
+  perrosAdoptados: number;
+}
+
 export default function ImpactSection() {
-  const [impactData, setImpactData] = useState({
+  const [impactData, setImpactData] = useState<ImpactData>({
     perrosEnSantuario: 0,
     padrinosGlobales: 0,
     rescatesPorAno: {},
@@ -32,8 +39,8 @@ export default function ImpactSection() {
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
-        const data = await FindMetrics();// llama a tu función axios
-        setImpactData(data.data); // asumimos que tu API devuelve { message, data }
+        const data = await FindMetrics();
+        setImpactData(data.data);
       } catch (error) {
         console.error("Error al traer métricas:", error);
       } finally {
@@ -48,13 +55,17 @@ export default function ImpactSection() {
     return <p className="text-center py-10">Cargando datos...</p>;
   }
 
-  // Preparar datos para los gráficos
+  // RADIAL
   const radialData = [
     { name: "Ocupación", value: impactData.perrosEnSantuario, full: 1200 },
   ];
 
+  // FIX: TIPADO PARA EVITAR TS18046
   const barData = Object.entries(impactData.rescatesPorAno).map(
-    ([year, rescued]) => ({ year, rescued })
+    ([year, rescued]: [string, number]) => ({
+      year,
+      rescued,
+    })
   );
 
   const donutData = [
@@ -65,7 +76,12 @@ export default function ImpactSection() {
     },
   ];
 
-  // Sparkline: si no hay datos por mes, se repite el total de padrinos
+  // FIX: TIENE QUE TENER VALORES NUMÉRICOS TIPADOS
+  const totalRescues = Object.values(impactData.rescatesPorAno).reduce(
+    (acc: number, val: number) => acc + val,
+    0
+  );
+
   const sparkData = [
     { month: "Ene", value: impactData.padrinosGlobales },
     { month: "Feb", value: impactData.padrinosGlobales },
@@ -74,11 +90,6 @@ export default function ImpactSection() {
     { month: "May", value: impactData.padrinosGlobales },
     { month: "Jun", value: impactData.padrinosGlobales },
   ];
-
-  const totalRescues = Object.values(impactData.rescatesPorAno).reduce(
-    (a, b) => a + b,
-    0
-  );
 
   return (
     <section className="w-full py-20 bg-white">
@@ -156,6 +167,7 @@ export default function ImpactSection() {
                 </Pie>
               </PieChart>
             </ResponsiveContainer>
+
             <p className="absolute inset-0 flex items-center justify-center text-4xl font-bold">
               {impactData.perrosAdoptados}
             </p>

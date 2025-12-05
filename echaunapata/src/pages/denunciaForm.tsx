@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
 import CambioSection from "../components/adopta/CambioSection";
@@ -16,8 +16,6 @@ export default function DenunciaForm() {
 
   const { values, photo, setPhoto, handleInputChange, handleRadioBoolean, handleRadioString, reset } = useDenunciaForm();
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => { window.scrollTo(0, 0); }, []);
 
   const handleSubmit = async () => {
     if (!values.type) return notifyError("Seleccione el tipo de denuncia");

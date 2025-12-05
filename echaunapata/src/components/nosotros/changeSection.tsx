@@ -16,7 +16,7 @@ export default function ChangeSection() {
                     Con el Plan Padrino Mensual, podés apadrinar un peludo con $10 al mes y ayudar a cubrir sus cuidados y bienestar.
                 </p>
                 
-                <Button text="¡DONAR!" color="#F23413" />  
+                <Button text="¡DONAR!" color="#F23413" to="/apadrina" />
             </div>
         </section>
     )

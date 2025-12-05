@@ -42,11 +42,6 @@ export default function AnimalDetalle() {
   const { id } = useParams();
   const [animal, setAnimal] = useState<Animal | null>(null);
 
-  // SCROLL ALWAYS TOP
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   // FETCH ANIMAL BY ID
   useEffect(() => {
     const fetchAnimal = async () => {

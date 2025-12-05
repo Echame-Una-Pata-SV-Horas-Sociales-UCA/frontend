@@ -13,7 +13,7 @@ export default function CambioSection() {
           insumos y fondos para nuestros más de 130 perros.
         </p>
 
-        <Button text="¡DONAR!" color="#F23413" />
+        <Button text="¡DONAR!" color="#F23413" to="/apadrina" />
       </div>
     </section>
   );

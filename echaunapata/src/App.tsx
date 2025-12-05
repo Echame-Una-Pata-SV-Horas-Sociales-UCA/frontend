@@ -9,6 +9,7 @@ import AdoptionForm from './pages/adoptionForm'
 import Denuncia from './pages/denuncia'
 import DenunciaForm from './pages/denunciaForm'
 import { Toaster } from "react-hot-toast";
+import ScrollToTop from './components/commons/ScrollToTop';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <>
     <Toaster position="top-right" reverseOrder={false} />
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/nosotros" element={<Nosotros />} />

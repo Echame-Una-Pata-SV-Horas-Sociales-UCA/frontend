@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { FindMetrics } from "../../service/DashboardService";
 import {
   RadialBarChart,
   RadialBar,
@@ -15,39 +17,68 @@ import {
 } from "recharts";
 
 export default function ImpactSection() {
-  // 1. RADIAL – Capacidad anual vs perros actuales
-  const radialData = [
-    { name: "Ocupación", value: 300, full: 1200 }, // 25%
-  ];
+  const [impactData, setImpactData] = useState({
+    perrosEnSantuario: 0,
+    padrinosGlobales: 0,
+    rescatesPorAno: {},
+    perrosAdoptados: 0,
+  });
+  const [loading, setLoading] = useState(true);
 
-  // 2. BARRAS – Rescates por año
-  const barData = [
-    { year: "2021", rescued: 250 },
-    { year: "2022", rescued: 300 },
-    { year: "2023", rescued: 220 },
-    { year: "2024", rescued: 230 },
-  ];
-
-  // 3. DONUT – Adopciones vs no adoptados
-  const donutData = [
-    { name: "Adoptados", value: 1000 },
-    { name: "Pendientes", value: 200 },
-  ];
-
-  // 4. SPARKLINE – Padrinos por mes
-  const sparkData = [
-    { month: "Ene", value: 200 },
-    { month: "Feb", value: 300 },
-    { month: "Mar", value: 450 },
-    { month: "Abr", value: 600 },
-    { month: "May", value: 800 },
-    { month: "Jun", value: 1000 },
-  ];
-
-  // Tus colores de marca
   const PRIMARY = "#2D6FF7";
   const PRIMARY_LIGHT = "#B0D0FF";
   const TEXT = "#1A1A1A";
+
+  useEffect(() => {
+    const fetchMetrics = async () => {
+      try {
+        const data = await FindMetrics();// llama a tu función axios
+        setImpactData(data.data); // asumimos que tu API devuelve { message, data }
+      } catch (error) {
+        console.error("Error al traer métricas:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMetrics();
+  }, []);
+
+  if (loading) {
+    return <p className="text-center py-10">Cargando datos...</p>;
+  }
+
+  // Preparar datos para los gráficos
+  const radialData = [
+    { name: "Ocupación", value: impactData.perrosEnSantuario, full: 1200 },
+  ];
+
+  const barData = Object.entries(impactData.rescatesPorAno).map(
+    ([year, rescued]) => ({ year, rescued })
+  );
+
+  const donutData = [
+    { name: "Adoptados", value: impactData.perrosAdoptados },
+    {
+      name: "Pendientes",
+      value: Math.max(0, 1200 - impactData.perrosAdoptados),
+    },
+  ];
+
+  // Sparkline: si no hay datos por mes, se repite el total de padrinos
+  const sparkData = [
+    { month: "Ene", value: impactData.padrinosGlobales },
+    { month: "Feb", value: impactData.padrinosGlobales },
+    { month: "Mar", value: impactData.padrinosGlobales },
+    { month: "Abr", value: impactData.padrinosGlobales },
+    { month: "May", value: impactData.padrinosGlobales },
+    { month: "Jun", value: impactData.padrinosGlobales },
+  ];
+
+  const totalRescues = Object.values(impactData.rescatesPorAno).reduce(
+    (a, b) => a + b,
+    0
+  );
 
   return (
     <section className="w-full py-20 bg-white">
@@ -56,7 +87,6 @@ export default function ImpactSection() {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-6 max-w-6xl mx-auto">
-
         {/* CARD 1 – RADIAL */}
         <div className="p-8 bg-[#F5F5F5] rounded-2xl shadow-sm flex flex-col items-center">
           <h3 className="font-bold mb-4 text-lg text-[#1A1A1A]">
@@ -72,16 +102,14 @@ export default function ImpactSection() {
                 endAngle={-270}
                 data={radialData}
               >
-                <RadialBar
-                  dataKey="value"
-                  cornerRadius={50}
-                  fill={PRIMARY}
-                />
+                <RadialBar dataKey="value" cornerRadius={50} fill={PRIMARY} />
               </RadialBarChart>
             </ResponsiveContainer>
           </div>
 
-          <p className="text-4xl font-bold mt-2 text-[#1A1A1A]">300</p>
+          <p className="text-4xl font-bold mt-2 text-[#1A1A1A]">
+            {impactData.perrosEnSantuario}
+          </p>
           <p className="text-gray-600">Perros actualmente</p>
         </div>
 
@@ -102,8 +130,10 @@ export default function ImpactSection() {
             </ResponsiveContainer>
           </div>
 
-          <p className="text-4xl font-bold text-[#1A1A1A] mt-2">+1000</p>
-          <p className="text-gray-600">Perros rescatados en 15 años</p>
+          <p className="text-4xl font-bold text-[#1A1A1A] mt-2">
+            +{totalRescues}
+          </p>
+          <p className="text-gray-600">Perros rescatados en el año</p>
         </div>
 
         {/* CARD 3 – DONUT */}
@@ -127,7 +157,7 @@ export default function ImpactSection() {
               </PieChart>
             </ResponsiveContainer>
             <p className="absolute inset-0 flex items-center justify-center text-4xl font-bold">
-              1000
+              {impactData.perrosAdoptados}
             </p>
           </div>
 
@@ -155,10 +185,11 @@ export default function ImpactSection() {
             </ResponsiveContainer>
           </div>
 
-          <p className="text-4xl font-bold text-[#1A1A1A]">+1000</p>
+          <p className="text-4xl font-bold text-[#1A1A1A]">
+            +{impactData.padrinosGlobales}
+          </p>
           <p className="text-gray-600">Padrinos alrededor del mundo</p>
         </div>
-
       </div>
     </section>
   );

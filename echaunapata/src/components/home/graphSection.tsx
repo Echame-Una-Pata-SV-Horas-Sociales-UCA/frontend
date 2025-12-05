@@ -15,6 +15,7 @@ import {
   LineChart,
   Line,
 } from "recharts";
+import Iconloader from "../commons/loadIcon";
 
 interface ImpactData {
   perrosEnSantuario: number;
@@ -30,6 +31,7 @@ export default function ImpactSection() {
     rescatesPorAno: {},
     perrosAdoptados: 0,
   });
+
   const [loading, setLoading] = useState(true);
 
   const PRIMARY = "#2D6FF7";
@@ -39,6 +41,7 @@ export default function ImpactSection() {
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
+        setLoading(true)
         const data = await FindMetrics();
         setImpactData(data.data);
       } catch (error) {
@@ -51,9 +54,9 @@ export default function ImpactSection() {
     fetchMetrics();
   }, []);
 
-  if (loading) {
-    return <p className="text-center py-10">Cargando datos...</p>;
-  }
+  // if (loading) {
+    
+  // }
 
   // RADIAL
   const radialData = [
@@ -93,6 +96,9 @@ export default function ImpactSection() {
 
   return (
     <section className="w-full py-20 bg-white">
+      {
+        loading && <Iconloader/>
+      }
       <h2 className="text-4xl font-bold text-center mb-12 text-[#1A1A1A]">
         Impacto de <span className="text-[#2D6FF7]">Échame Una Pata SV</span>
       </h2>

@@ -18,7 +18,7 @@ export default function StatsSection() {
               apariencia, edad o necesidades y tratamientos especiales.
             </p>
   
-            <Button text="¡DONAR!" color="#4A1214" />  
+            <Button text="¡DONAR!" color="#4A1214" to="/apadrina" />
           </div>
           <GraphSection />
   
@@ -47,4 +47,3 @@ export default function StatsSection() {
       </section>
     )
   }
-  

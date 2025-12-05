@@ -14,13 +14,13 @@ export default function Footer() {
             <div className="md:col-span-1">
               <h3 className="text-sm font-bold mb-4 tracking-wide">NUESTRAS REDES</h3>
               <div className="flex gap-4 mb-8">
-                <a href="#" className="hover:text-yellow-400 transition">
+                <a href="https://www.facebook.com/echameunapatasv/?locale=es_LA" className="hover:text-yellow-400 transition">
                   <FacebookIcon />
                 </a>
-                <a href="#" className="hover:text-yellow-400 transition">
+                <a href="https://www.instagram.com/echameunapatasv/?hl=en" className="hover:text-yellow-400 transition">
                     <InstagramIcon />
                 </a>
-                <a href="#" className="hover:text-yellow-400 transition">
+                <a href="https://api.whatsapp.com/send?phone=50379291589" className="hover:text-yellow-400 transition">
                   <WhatsAppIcon />
                 </a>
               </div>
@@ -60,11 +60,11 @@ export default function Footer() {
             <div className="md:col-span-2">
               <h3 className="text-sm font-bold mb-6 tracking-wide">ÚNETE</h3>
               <ul className="grid grid-cols-2 gap-4">
-                <li>
-                  <Link to="/hogares" className="hover:text-yellow-400 transition">
-                    Hogares de acogida
-                  </Link>
-                </li>
+                {/*<li>*/}
+                {/*  <Link to="/hogares" className="hover:text-yellow-400 transition">*/}
+                {/*    Hogares de acogida*/}
+                {/*  </Link>*/}
+                {/*</li>*/}
                 <li>
                   <Link to="/denuncia" className="hover:text-yellow-400 transition">
                     Denuncia
@@ -82,9 +82,9 @@ export default function Footer() {
           {/* Copyright */}
           <div className="border-t border-gray-700 pt-8 text-center text-xs text-gray-400">
             <p>ÉCHAME UNA PATA SV © 2025. TODOS LOS DERECHOS RESERVADOS</p>
+            <p className="text-xs text-gray-400 italic mt-2">En memoria de Shakira Eguizábal.</p>
           </div>
         </div>
       </footer>
     )
   }
-  

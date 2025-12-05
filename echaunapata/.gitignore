@@ -2,6 +2,7 @@
 node_modules/
 dist/
 dist-ssr/
+.vite/
 *.local
 
 # Logs
@@ -17,15 +18,24 @@ lerna-debug.log*
 .DS_Store
 Thumbs.db
 
+.AppleDouble/
+.LSOverride
+Desktop.ini
+$RECYCLE.BIN/
+
 # Editor directories and files
 .vscode/
 !.vscode/extensions.json
 .idea/
+
+.history/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+*.iml
 
 # TypeScript
 *.tsbuildinfo
@@ -79,3 +89,13 @@ $RECYCLE.BIN/
 # playwright-report/
 
 # End of file
+
+# Coverage
+coverage/
+
+# Env files
+.env*
+.env.*.local
+
+# React Native
+.expo/

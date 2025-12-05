@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { FindMetrics } from "../../service/DashboardService";
+//falta el useEfect
+import { useState } from "react";
+// import { FindMetrics } from "../../service/DashboardService"; // ✅ Descomentar al conectar con la API
 import {
   RadialBarChart,
   RadialBar,
@@ -12,10 +13,7 @@ import {
   PieChart,
   Pie,
   Cell,
-  LineChart,
-  Line,
 } from "recharts";
-import Iconloader from "../commons/loadIcon";
 
 interface ImpactData {
   perrosEnSantuario: number;
@@ -24,26 +22,41 @@ interface ImpactData {
   perrosAdoptados: number;
 }
 
+function SkeletonCard() {
+  return (
+    <div className="p-8 bg-[#F5F5F5] rounded-2xl shadow-sm flex flex-col items-center animate-pulse">
+      <div className="h-6 w-32 bg-gray-300 mb-4 rounded-md" />
+      <div className="w-full h-64 bg-gray-300 rounded-lg" />
+      <div className="h-6 w-20 bg-gray-300 mt-4 rounded-md" />
+      <div className="h-4 w-32 bg-gray-300 mt-2 rounded-md" />
+    </div>
+  );
+}
+
 export default function ImpactSection() {
-  const [impactData, setImpactData] = useState<ImpactData>({
-    perrosEnSantuario: 0,
-    padrinosGlobales: 0,
-    rescatesPorAno: {},
-    perrosAdoptados: 0,
+  // Datos quemados para desarrollo / pruebas
+  const [impactData] = useState<ImpactData>({
+    perrosEnSantuario: 155,
+    padrinosGlobales: 40,
+    rescatesPorAno: { "2024": 150, "2025": 200 },
+    perrosAdoptados: 380,
   });
 
-  const [loading, setLoading] = useState(true);
+  // Loading deshabilitado para datos quemados
+  const [loading] = useState(false);
 
   const PRIMARY = "#2D6FF7";
   const PRIMARY_LIGHT = "#B0D0FF";
   const TEXT = "#1A1A1A";
 
+  /*
+  // ❌ Comentar cuando usamos datos quemados
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
-        setLoading(true)
-        const data = await FindMetrics();
-        setImpactData(data.data);
+        setLoading(true);
+        const data = await FindMetrics(); // ✅ Descomentar para usar API
+        setImpactData(data.data);         // ✅ Descomentar para usar API
       } catch (error) {
         console.error("Error al traer métricas:", error);
       } finally {
@@ -53,24 +66,14 @@ export default function ImpactSection() {
 
     fetchMetrics();
   }, []);
+  */
 
-  // if (loading) {
-    
-  // }
-
-  // RADIAL
   const radialData = [
     { name: "Ocupación", value: impactData.perrosEnSantuario, full: 1200 },
   ];
-
-  // FIX: TIPADO PARA EVITAR TS18046
   const barData = Object.entries(impactData.rescatesPorAno).map(
-    ([year, rescued]: [string, number]) => ({
-      year,
-      rescued,
-    })
+    ([year, rescued]) => ({ year, rescued })
   );
-
   const donutData = [
     { name: "Adoptados", value: impactData.perrosAdoptados },
     {
@@ -78,137 +81,144 @@ export default function ImpactSection() {
       value: Math.max(0, 1200 - impactData.perrosAdoptados),
     },
   ];
-
-  // FIX: TIENE QUE TENER VALORES NUMÉRICOS TIPADOS
   const totalRescues = Object.values(impactData.rescatesPorAno).reduce(
-    (acc: number, val: number) => acc + val,
+    (acc, val) => acc + val,
     0
   );
-
-  const sparkData = [
-    { month: "Ene", value: impactData.padrinosGlobales },
-    { month: "Feb", value: impactData.padrinosGlobales },
-    { month: "Mar", value: impactData.padrinosGlobales },
-    { month: "Abr", value: impactData.padrinosGlobales },
-    { month: "May", value: impactData.padrinosGlobales },
-    { month: "Jun", value: impactData.padrinosGlobales },
-  ];
+  const yearsCount = barData.length;
+  const avgRescues = yearsCount > 0 ? Math.round(totalRescues / yearsCount) : 0;
 
   return (
     <section className="w-full py-20 bg-white">
-      {
-        loading && <Iconloader/>
-      }
       <h2 className="text-4xl font-bold text-center mb-12 text-[#1A1A1A]">
         Impacto de <span className="text-[#2D6FF7]">Échame Una Pata SV</span>
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-6 max-w-6xl mx-auto">
-        {/* CARD 1 – RADIAL */}
-        <div className="p-8 bg-[#F5F5F5] rounded-2xl shadow-sm flex flex-col items-center">
-          <h3 className="font-bold mb-4 text-lg text-[#1A1A1A]">
-            Perros en el Santuario
-          </h3>
-
-          <div className="w-64 h-64">
-            <ResponsiveContainer>
-              <RadialBarChart
-                innerRadius="70%"
-                outerRadius="100%"
-                startAngle={90}
-                endAngle={-270}
-                data={radialData}
+        {loading
+          ? Array.from({ length: 4 }).map((_, idx) => (
+              <SkeletonCard key={idx} />
+            ))
+          : [
+              <div
+                key="radial"
+                className="p-8 bg-[#F5F5F5] rounded-2xl shadow-sm flex flex-col items-center transition-opacity duration-700 opacity-0 animate-fadeIn"
+                style={{ animationDelay: `0ms` }}
               >
-                <RadialBar dataKey="value" cornerRadius={50} fill={PRIMARY} />
-              </RadialBarChart>
-            </ResponsiveContainer>
-          </div>
+                <h3 className="font-bold mb-4 text-lg text-[#1A1A1A]">
+                  Perros en el Santuario
+                </h3>
+                <div className="w-64 h-64">
+                  <ResponsiveContainer>
+                    <RadialBarChart
+                      innerRadius="70%"
+                      outerRadius="100%"
+                      startAngle={90}
+                      endAngle={-270}
+                      data={radialData}
+                    >
+                      <RadialBar
+                        dataKey="value"
+                        cornerRadius={50}
+                        fill={PRIMARY}
+                      />
+                    </RadialBarChart>
+                  </ResponsiveContainer>
+                </div>
+                <p className="text-4xl font-bold mt-2 text-[#1A1A1A]">
+                  {impactData.perrosEnSantuario}
+                </p>
+                <p className="text-gray-600">Perros actualmente</p>
+              </div>,
 
-          <p className="text-4xl font-bold mt-2 text-[#1A1A1A]">
-            {impactData.perrosEnSantuario}
-          </p>
-          <p className="text-gray-600">Perros actualmente</p>
-        </div>
+              <div
+                key="bar"
+                className="p-8 bg-[#F5F5F5] rounded-2xl shadow-sm flex flex-col items-center transition-opacity duration-700 opacity-0 animate-fadeIn"
+                style={{ animationDelay: `100ms` }}
+              >
+                <h3 className="font-bold mb-4 text-lg text-[#1A1A1A]">
+                  Rescates por Año
+                </h3>
+                <div className="w-full h-64">
+                  <ResponsiveContainer>
+                    <BarChart data={barData}>
+                      <XAxis dataKey="year" stroke={TEXT} />
+                      <YAxis stroke={TEXT} />
+                      <Tooltip />
+                      <Bar
+                        dataKey="rescued"
+                        fill={PRIMARY}
+                        radius={[6, 6, 0, 0]}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+                <p className="text-4xl font-bold text-[#1A1A1A] mt-2">
+                  +{totalRescues}
+                </p>
+                <p className="text-gray-600">
+                  Total rescatados (en {yearsCount}{" "}
+                  {yearsCount !== 1 ? "años" : "año"} mostrados)
+                </p>
+                <p className="text-gray-600">Promedio: {avgRescues} por año</p>
+              </div>,
 
-        {/* CARD 2 – BAR CHART */}
-        <div className="p-8 bg-[#F5F5F5] rounded-2xl shadow-sm flex flex-col items-center">
-          <h3 className="font-bold mb-4 text-lg text-[#1A1A1A]">
-            Rescates por Año
-          </h3>
+              <div
+                key="donut"
+                className="p-8 bg-[#F5F5F5] rounded-2xl shadow-sm flex flex-col items-center transition-opacity duration-700 opacity-0 animate-fadeIn"
+                style={{ animationDelay: `200ms` }}
+              >
+                <h3 className="font-bold mb-4 text-lg text-[#1A1A1A]">
+                  Perros Adoptados
+                </h3>
+                <div className="w-64 h-64 relative">
+                  <ResponsiveContainer>
+                    <PieChart>
+                      <Pie
+                        data={donutData}
+                        dataKey="value"
+                        innerRadius="65%"
+                        outerRadius="100%"
+                      >
+                        <Cell fill={PRIMARY} />
+                        <Cell fill={PRIMARY_LIGHT} />
+                      </Pie>
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <p className="absolute inset-0 flex items-center justify-center text-4xl font-bold">
+                    {impactData.perrosAdoptados}
+                  </p>
+                </div>
+                <p className="text-gray-600">Entregados en adopción</p>
+              </div>,
 
-          <div className="w-full h-64">
-            <ResponsiveContainer>
-              <BarChart data={barData}>
-                <XAxis dataKey="year" stroke={TEXT} />
-                <YAxis stroke={TEXT} />
-                <Tooltip />
-                <Bar dataKey="rescued" fill={PRIMARY} radius={[6, 6, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-
-          <p className="text-4xl font-bold text-[#1A1A1A] mt-2">
-            +{totalRescues}
-          </p>
-          <p className="text-gray-600">Perros rescatados en el año</p>
-        </div>
-
-        {/* CARD 3 – DONUT */}
-        <div className="p-8 bg-[#F5F5F5] rounded-2xl shadow-sm flex flex-col items-center">
-          <h3 className="font-bold mb-4 text-lg text-[#1A1A1A]">
-            Perros Adoptados
-          </h3>
-
-          <div className="w-64 h-64 relative">
-            <ResponsiveContainer>
-              <PieChart>
-                <Pie
-                  data={donutData}
-                  dataKey="value"
-                  innerRadius="65%"
-                  outerRadius="100%"
-                >
-                  <Cell fill={PRIMARY} />
-                  <Cell fill={PRIMARY_LIGHT} />
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
-
-            <p className="absolute inset-0 flex items-center justify-center text-4xl font-bold">
-              {impactData.perrosAdoptados}
-            </p>
-          </div>
-
-          <p className="text-gray-600">Entregados en adopción</p>
-        </div>
-
-        {/* CARD 4 – SPARKLINE */}
-        <div className="p-8 bg-[#F5F5F5] rounded-2xl shadow-sm flex flex-col items-center">
-          <h3 className="font-bold mb-4 text-lg text-[#1A1A1A]">
-            Padrinos Globales
-          </h3>
-
-          <div className="w-full h-40">
-            <ResponsiveContainer>
-              <LineChart data={sparkData}>
-                <Tooltip />
-                <Line
-                  type="monotone"
-                  dataKey="value"
-                  stroke={PRIMARY}
-                  strokeWidth={3}
-                  dot={false}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-
-          <p className="text-4xl font-bold text-[#1A1A1A]">
-            +{impactData.padrinosGlobales}
-          </p>
-          <p className="text-gray-600">Padrinos alrededor del mundo</p>
-        </div>
+              <div
+                key="padrinos"
+                className="p-8 bg-[#F5F5F5] rounded-2xl shadow-sm flex flex-col items-center transition-opacity duration-700 opacity-0 animate-fadeIn"
+                style={{ animationDelay: `300ms` }}
+              >
+                <h3 className="font-bold mb-4 text-lg text-[#1A1A1A]">
+                  Padrinos Globales
+                </h3>
+                <div className="w-64 h-64 relative flex items-center justify-center">
+                  <div className="w-36 h-36 rounded-full bg-gradient-to-r from-[#2D6FF7] to-[#B0D0FF] flex items-center justify-center text-white text-4xl font-bold shadow-md">
+                    +{impactData.padrinosGlobales}
+                  </div>
+                </div>
+                <p className="text-gray-600">Padrinos alrededor del mundo</p>
+              </div>,
+            ]}
       </div>
+
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.7s forwards;
+        }
+      `}</style>
     </section>
   );
 }

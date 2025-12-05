@@ -8,13 +8,17 @@ import DogsGrid from "../components/commons/dogsgrid";
 import SupportSection from "../components/home/support";
 import Footer from "../components/commons/footer";
 import Button from "../components/commons/button";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
     <div>
      <Navbar solid={false} />
      <Hero>
-       <div className="max-w-2xl">
+       <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }} className="max-w-2xl">
          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
            ¡El cambio comienza en ti!
          </h1>
@@ -25,7 +29,7 @@ export default function Home() {
          </p>
  
          <Button text="¡DONAR!" color="#F23413" />  
-       </div>
+       </motion.div>
      </Hero>
      <StatsSection />
 

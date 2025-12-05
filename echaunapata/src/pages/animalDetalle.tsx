@@ -12,6 +12,7 @@ import {
   MedicalServices,
   MedicationLiquid,
 } from "@mui/icons-material";
+import SkeletonAnimal from "../components/commons/skeletonAnimal";
 
 export interface Animal {
   id: string;
@@ -41,11 +42,6 @@ export default function AnimalDetalle() {
   const { id } = useParams();
   const [animal, setAnimal] = useState<Animal | null>(null);
 
-  // SCROLL ALWAYS TOP
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   // FETCH ANIMAL BY ID
   useEffect(() => {
     const fetchAnimal = async () => {
@@ -60,13 +56,8 @@ export default function AnimalDetalle() {
     fetchAnimal();
   }, [id]);
 
-  // LOADING STATE
   if (!animal) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <p>Cargando información...</p>
-      </div>
-    );
+    return <SkeletonAnimal />;
   }
 
   const details = [

@@ -1,23 +1,27 @@
 import currencyExchange from '../../assets/currency_exchange.svg';
 import volunteer_activism from '../../assets/volunteer_activism.svg';
 import pets from '../../assets/pets.svg';
+import { Link } from 'react-router-dom';
 export default function SupportSection() {
 
     const supportOptions = [
       {
         title: "Doná",
         description: "alimento, insumos de limpieza o efectivo",
-        icon: currencyExchange
+        icon: currencyExchange,
+        to: "/apadrina",
       },
       {
         title: "Apadriná",
         description: "mensualmente con $10.00 a un peludo rescatado que vive en el refugio",
-        icon: volunteer_activism
+        icon: volunteer_activism,
+        to: "/apadrina",
       },
       {
         title: "Adoptá",
         description: "responsablemente a un peludo rehabilitado en nuestro refugio",
-        icon: pets
+        icon: pets,
+        to: "/adopta",
       },
     ]
   
@@ -51,9 +55,9 @@ export default function SupportSection() {
                 <p className="text-gray-700 text-sm mb-6 flex-grow">{option.description}</p>
   
                 {/* Button */}
-                <button className="bg-black text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-gray-800 transition-colors">
+                <Link to={option.to} className="bg-black text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-gray-800 transition-colors inline-block">
                   QUIERO SABER MÁS
-                </button>
+                </Link>
               </div>
             ))}
           </div>
@@ -61,4 +65,3 @@ export default function SupportSection() {
       </section>
     )
   }
-  

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/homelogo.png";
 
@@ -9,14 +9,23 @@ interface NavbarProps {
 export default function Navbar({ solid = false }: NavbarProps) {
   const [open, setOpen] = useState(false);
 
+  // CERRAR MENU SI SE AGRANDA LA PANTALLA
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) setOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <nav
       className={
         solid
           ? "fixed top-0 left-0 right-0 z-50 bg-black shadow-sm"
           : open
-          ? "fixed top-0 left-0 right-0 z-50 bg-black" // ← MENU ABIERTO = SIEMPRE NEGRO
-          : "absolute top-0 left-0 right-0 z-50 bg-black md:bg-black/40 backdrop-blur-sm"
+          ? "fixed top-0 left-0 right-0 z-50 bg-black"
+          : "absolute top-0 left-0 right-0 z-50 bg-black lg:bg-black/40 backdrop-blur-sm"
       }
     >
       <div className="w-full px-4 sm:px-6 py-4">
@@ -27,8 +36,8 @@ export default function Navbar({ solid = false }: NavbarProps) {
             <img src={logo} alt="logo" className="w-20" />
           </Link>
 
-          {/* Desktop menu */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* MENU DESKTOP */}
+          <div className="hidden lg:flex items-center gap-8">
             <Link to="/refugio" className="text-white hover:text-gray-300">Refugio</Link>
             <Link to="/nosotros" className="text-white hover:text-gray-300">Nosotros</Link>
             <Link to="/adopta" className="text-white hover:text-gray-300">Adopta</Link>
@@ -36,45 +45,43 @@ export default function Navbar({ solid = false }: NavbarProps) {
             <Link to="/denuncia" className="text-white hover:text-gray-300">Denuncia</Link>
           </div>
 
-          {/* Desktop buttons */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* Botón Donar (Desktop) */}
+          <div className="hidden lg:flex items-center gap-4">
             <button className="border-2 border-white text-white px-6 py-2 rounded-full hover:bg-white hover:text-black transition-all font-semibold">
               ¡Donar!
             </button>
           </div>
 
-          {/* Mobile hamburger */}
+          {/* HAMBURGER (solo móvil) */}
           <button
-            className="md:hidden text-white focus:outline-none"
+            className="lg:hidden text-white focus:outline-none"
             onClick={() => setOpen(true)}
           >
-            <svg
-              className="w-7 h-7"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-7 h-7" stroke="currentColor" fill="none" strokeWidth={2} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
+
         </div>
       </div>
 
-      {/* OVERLAY */}
+      {/* OVERLAY — SOLO MOVIL */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/90 z-[60]"
+          className="fixed inset-0 bg-black/90 z-[60] lg:hidden"
           onClick={() => setOpen(false)}
         />
       )}
 
-      {/* MENU MOBILE */}
+      {/* PANEL MOVIL — SOLO MOVIL */}
       <div
-        className={`fixed top-0 right-0 h-full 
-        w-full sm:w-80 bg-black text-white 
-        z-[70] shadow-xl transform transition-transform duration-300
-        ${open ? "translate-x-0" : "translate-x-full"}`}
+        className={`
+          fixed top-0 right-0 h-full 
+          w-full sm:w-80 bg-black text-white 
+          z-[70] shadow-xl transform transition-transform duration-300 
+          lg:hidden
+          ${open ? "translate-x-0" : "translate-x-full"}
+        `}
       >
         <div className="flex justify-end p-4">
           <button onClick={() => setOpen(false)}>

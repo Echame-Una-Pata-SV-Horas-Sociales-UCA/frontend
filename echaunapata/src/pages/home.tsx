@@ -24,7 +24,7 @@ export default function Home() {
            Actualmente, albergamos a más de 300 perros que buscan una familia definitiva.
          </p>
  
-         <Button text="¡DONAR!" color="#F23413" />  
+         <Button text="¡DONAR!" color="#F23413" to="/apadrina" />
        </div>
      </Hero>
      <StatsSection />

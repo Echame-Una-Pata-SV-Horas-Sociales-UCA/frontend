@@ -40,9 +40,9 @@ export default function Navbar({ solid = false }: NavbarProps) {
 
           {/* Desktop Donate */}
           <div className="hidden lg:flex">
-            <button className="border-2 border-white text-white px-6 py-2 rounded-full hover:bg-white hover:text-black transition-all font-semibold">
+            <Link to="/apadrina" className="border-2 border-white text-white px-6 py-2 rounded-full hover:bg-white hover:text-black transition-all font-semibold">
               ¡Donar!
-            </button>
+            </Link>
           </div>
 
           {/* -------- HAMBURGER MENU (< 1024px) -------- */}
@@ -103,9 +103,9 @@ export default function Navbar({ solid = false }: NavbarProps) {
 
         {/* DONATE BUTTON */}
         <div className="px-8 mt-10">
-          <button className="w-full border-2 border-white text-white py-3 rounded-full hover:bg-white hover:text-black transition-all font-semibold">
+          <Link to="/apadrina" className="w-full block text-center border-2 border-white text-white py-3 rounded-full hover:bg-white hover:text-black transition-all font-semibold">
             ¡Donar!
-          </button>
+          </Link>
         </div>
       </div>
     </nav>

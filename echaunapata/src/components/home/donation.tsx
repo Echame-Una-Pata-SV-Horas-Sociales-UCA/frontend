@@ -1,4 +1,5 @@
 import { VolunteerActivismOutlined, Vaccines, NightShelterOutlined, SosOutlined } from "@mui/icons-material";
+import { Link } from 'react-router-dom';
 
 export default function Donation() {
   const donationItems = [
@@ -50,9 +51,9 @@ export default function Donation() {
               </p>
             </div>
 
-            <button className="bg-black text-white font-bold py-3 px-8 rounded-full hover:bg-gray-900 transition">
+            <Link to="/apadrina" className="bg-black text-white font-bold py-3 px-8 rounded-full hover:bg-gray-900 transition inline-block text-center">
               ¡DONAR!
-            </button>
+            </Link>
           </div>
 
           {/* RIGHT SIDE */}

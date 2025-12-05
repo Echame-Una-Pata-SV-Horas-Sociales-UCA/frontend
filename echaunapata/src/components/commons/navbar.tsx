@@ -34,7 +34,7 @@ export default function Navbar({ solid = false }: NavbarProps) {
             <Link to="/refugio" className="text-white hover:text-gray-300">Refugio</Link>
             <Link to="/nosotros" className="text-white hover:text-gray-300">Nosotros</Link>
             <Link to="/adopta" className="text-white hover:text-gray-300">Adopta</Link>
-            <Link to="/apadrina" className="text-white hover:text-gray-300">Apadrina</Link>
+            <Link to="/apadrina" className="text-white hover:text-gray-300">Donacion</Link>
             <Link to="/denuncia" className="text-white hover:text-gray-300">Denuncia</Link>
           </div>
 

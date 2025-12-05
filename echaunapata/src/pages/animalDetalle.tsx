@@ -1,4 +1,4 @@
-import { useParams, useLocation, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";

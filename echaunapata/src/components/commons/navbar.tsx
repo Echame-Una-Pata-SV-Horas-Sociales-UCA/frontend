@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/homelogo.png";
 
@@ -9,34 +9,27 @@ interface NavbarProps {
 export default function Navbar({ solid = false }: NavbarProps) {
   const [open, setOpen] = useState(false);
 
-  // CERRAR MENU SI SE AGRANDA LA PANTALLA
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) setOpen(false);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
     <nav
-      className={
-        solid
-          ? "fixed top-0 left-0 right-0 z-50 bg-black shadow-sm"
-          : open
-          ? "fixed top-0 left-0 right-0 z-50 bg-black"
-          : "absolute top-0 left-0 right-0 z-50 bg-black lg:bg-black/40 backdrop-blur-sm"
-      }
-    >
+  className={`
+    fixed top-0 left-0 right-0 z-50
+    ${solid
+      ? "bg-black shadow-sm"
+      : "bg-black lg:bg-black/40 lg:backdrop-blur-sm"
+    }
+  `}
+>
+
+      {/* NAVBAR CONTENT */}
       <div className="w-full px-4 sm:px-6 py-4">
         <div className="flex items-center justify-between w-full">
 
-          {/* Logo */}
+          {/* LOGO */}
           <Link to="/" className="flex items-center">
             <img src={logo} alt="logo" className="w-20" />
           </Link>
 
-          {/* MENU DESKTOP */}
+          {/* -------- DESKTOP MENU (LG+) -------- */}
           <div className="hidden lg:flex items-center gap-8">
             <Link to="/refugio" className="text-white hover:text-gray-300">Refugio</Link>
             <Link to="/nosotros" className="text-white hover:text-gray-300">Nosotros</Link>
@@ -45,19 +38,25 @@ export default function Navbar({ solid = false }: NavbarProps) {
             <Link to="/denuncia" className="text-white hover:text-gray-300">Denuncia</Link>
           </div>
 
-          {/* Botón Donar (Desktop) */}
-          <div className="hidden lg:flex items-center gap-4">
+          {/* Desktop Donate */}
+          <div className="hidden lg:flex">
             <button className="border-2 border-white text-white px-6 py-2 rounded-full hover:bg-white hover:text-black transition-all font-semibold">
               ¡Donar!
             </button>
           </div>
 
-          {/* HAMBURGER (solo móvil) */}
+          {/* -------- HAMBURGER MENU (< 1024px) -------- */}
           <button
             className="lg:hidden text-white focus:outline-none"
             onClick={() => setOpen(true)}
           >
-            <svg className="w-7 h-7" stroke="currentColor" fill="none" strokeWidth={2} viewBox="0 0 24 24">
+            <svg
+              className="w-7 h-7"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
@@ -65,25 +64,27 @@ export default function Navbar({ solid = false }: NavbarProps) {
         </div>
       </div>
 
-      {/* OVERLAY — SOLO MOVIL */}
+      {/* -------- FULL SCREEN OVERLAY (MOBILE/TABLET) -------- */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/90 z-[60] lg:hidden"
+          className="fixed inset-0 bg-black z-[60] lg:hidden"
           onClick={() => setOpen(false)}
         />
       )}
 
-      {/* PANEL MOVIL — SOLO MOVIL */}
+      {/* -------- MOBILE/TABLET MENU PANEL -------- */}
       <div
         className={`
-          fixed top-0 right-0 h-full 
-          w-full sm:w-80 bg-black text-white 
-          z-[70] shadow-xl transform transition-transform duration-300 
-          lg:hidden
+          fixed inset-0 
+          bg-black text-white
+          z-[70] shadow-xl
+          transform transition-transform duration-300
           ${open ? "translate-x-0" : "translate-x-full"}
+          lg:hidden
         `}
       >
-        <div className="flex justify-end p-4">
+        {/* CLOSE BUTTON */}
+        <div className="flex justify-end p-6">
           <button onClick={() => setOpen(false)}>
             <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -91,7 +92,8 @@ export default function Navbar({ solid = false }: NavbarProps) {
           </button>
         </div>
 
-        <nav className="flex flex-col gap-6 px-6 text-xl">
+        {/* LINKS */}
+        <nav className="flex flex-col gap-6 px-8 text-xl mt-4">
           <Link to="/refugio" onClick={() => setOpen(false)}>Refugio</Link>
           <Link to="/nosotros" onClick={() => setOpen(false)}>Nosotros</Link>
           <Link to="/adopta" onClick={() => setOpen(false)}>Adopta</Link>
@@ -99,8 +101,9 @@ export default function Navbar({ solid = false }: NavbarProps) {
           <Link to="/denuncia" onClick={() => setOpen(false)}>Denuncia</Link>
         </nav>
 
-        <div className="px-6 mt-8">
-          <button className="w-full border-2 border-white text-white py-2 rounded-full hover:bg-white hover:text-black transition-all font-semibold">
+        {/* DONATE BUTTON */}
+        <div className="px-8 mt-10">
+          <button className="w-full border-2 border-white text-white py-3 rounded-full hover:bg-white hover:text-black transition-all font-semibold">
             ¡Donar!
           </button>
         </div>

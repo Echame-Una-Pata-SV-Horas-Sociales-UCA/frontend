@@ -1,9 +1,19 @@
 import { useState } from "react";
 
+interface DenunciaFormErrors {
+  dui?: string;
+  firstNames?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  type?: string;
+  description?: string;
+}
+
 export const useDenunciaForm = () => {
   const [values, setValues] = useState({
     isAnonymous: false,
     firstNames: "",
+    lastNames: "",
     dui: "",
     contactEmail: "",
     contactPhone: "",
@@ -11,11 +21,13 @@ export const useDenunciaForm = () => {
     location: "",
     locationUrl: "",
     description: "",
+    address: "",
+    city: "",
   });
 
   const [photo, setPhoto] = useState<File | null>(null);
 
-  const [errors, setErrors] = useState<any>({});
+  const [errors, setErrors] = useState<DenunciaFormErrors>({});
   const [loading, setLoading] = useState(false);
 
   const handleInputChange = (
@@ -44,7 +56,7 @@ export const useDenunciaForm = () => {
   };
 
   const validate = () => {
-    const newErrors: any = {};
+    const newErrors: DenunciaFormErrors = {};
 
     if (!values.isAnonymous) {
       // DUI
@@ -89,6 +101,7 @@ export const useDenunciaForm = () => {
     setValues({
       isAnonymous: false,
       firstNames: "",
+      lastNames: "",
       dui: "",
       contactEmail: "",
       contactPhone: "",
@@ -96,6 +109,8 @@ export const useDenunciaForm = () => {
       location: "",
       locationUrl: "",
       description: "",
+      address: "",
+      city: "",
     });
     setErrors({});
     setPhoto(null);

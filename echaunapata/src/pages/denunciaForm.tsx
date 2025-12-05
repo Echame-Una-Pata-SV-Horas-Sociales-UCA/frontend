@@ -35,8 +35,15 @@ export default function DenunciaForm() {
     formData.append("isAnonymous", String(values.isAnonymous));
     formData.append("contactPhone", values.contactPhone);
     formData.append("contactEmail", values.contactEmail);
-    formData.append("person[firstNames]", values.firstNames || "");
-    formData.append("person[dui]", values.dui || "");
+    if (!values.isAnonymous) {
+      formData.append("person.firstNames", values.firstNames || "");
+      formData.append("person.lastNames", values.lastNames || "");
+      formData.append("person.email", values.contactEmail || "");
+      formData.append("person.phoneNumber", values.contactPhone || "");
+      formData.append("person.dui", values.dui || "");
+      formData.append("person.address", values.address || "");
+      formData.append("person.city", values.city || "");
+    }
     formData.append("photo", photo);
 
     try {
@@ -44,7 +51,7 @@ export default function DenunciaForm() {
       notifySuccess("Denuncia enviada con éxito");
       reset();
       setPhoto(null);
-    } catch (err) {
+    } catch {
       notifyError("Error al enviar la denuncia");
     } finally {
       setLoading(false);
@@ -175,7 +182,7 @@ export default function DenunciaForm() {
 
             {/* SECCIÓN 4 */}
             <ExpandableSection title="Evidencia">
-              <FileUploadField onFileSelect={setPhoto} />
+              <FileUploadField onFileSelect={setPhoto} file={photo} />
 
               {photo && (
                 <p className="text-sm text-gray-600 mt-2">

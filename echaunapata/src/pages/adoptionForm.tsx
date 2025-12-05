@@ -154,9 +154,9 @@ export default function AdoptionForm() {
       setAcceptsVisits(null);
       setCommitmentToSterilization(null);
       setCommitmentToSendPhotos(null);
-    } catch (error) {
+    } catch (error:any) {
       console.error(error);
-      notifyError("Error al enviar solicitud");
+      notifyError(error.message);
     } finally {
       setLoading(false);
     }

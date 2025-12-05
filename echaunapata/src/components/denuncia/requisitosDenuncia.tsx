@@ -27,7 +27,7 @@ Tu voz es clave para defender a quienes no pueden hacerlo por sí mismos. Juntos
       <Link to="/denuncia-form" className="w-full flex justify-center">
       <ButtonForms 
         text="LLENAR FICHA DE DENUNCIA"
-        className="w-lg"
+        className="w-full sm:w-auto"
       />
     </Link>
     </div>

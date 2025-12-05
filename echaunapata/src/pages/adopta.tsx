@@ -1,11 +1,15 @@
+import { useState } from "react";
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
 import Hero from "../components/commons/hero";
 import RequisitosAdopcion from "../components/adopta/requisitos";
 import PerrosDisponibles from "../components/adopta/perrosDisponibles";
 import CambioSection from "../components/adopta/CambioSection";
+import Iconloader from "../components/commons/loadIcon";
 
 export default function Adopta() {
+  const [loadingChild, setLoadingChild] = useState(false);
+
   return (
     <>
       <Navbar solid={false} />
@@ -19,11 +23,13 @@ export default function Adopta() {
           </p>
         </div>
       </Hero>
+      {loadingChild && (
+        <Iconloader/>
+      )}
       <RequisitosAdopcion />
-      <PerrosDisponibles />
-      <CambioSection/>
+      <PerrosDisponibles onLoadingChange={setLoadingChild} />
+      <CambioSection />
       <Footer />
     </>
   );
 }
-

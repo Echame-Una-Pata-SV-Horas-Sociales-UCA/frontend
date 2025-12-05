@@ -15,16 +15,24 @@ interface Animal {
   photo?: string;
 }
 
-export default function PerrosDisponibles() {
+export default function PerrosDisponibles({
+  onLoadingChange,
+}: {
+  onLoadingChange: (value: boolean) => void;
+}) {
   const [perros, setPerros] = useState<Animal[]>([]);
+  // const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAnimals = async () => {
       try {
-        const json = await GetAllAnimalsAvailable(); // ← AQUÍ ya obtienes el JSON listo
-        setPerros(json.data); // ← tu API devuelve { message, data }
+        onLoadingChange(true);
+        const json = await GetAllAnimalsAvailable();
+        setPerros(json.data);
       } catch (error) {
         console.error("Error fetching animals", error);
+      } finally {
+        onLoadingChange(false);
       }
     };
 

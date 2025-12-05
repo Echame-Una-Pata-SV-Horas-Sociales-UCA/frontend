@@ -30,6 +30,9 @@ interface AdoptionFormData {
 }
 
 export default function AdoptionForm() {
+  const { state } = useLocation();
+  const animal = state?.animal || {};
+
   const initialForm: AdoptionFormData = {
     // Datos personales
     firstNames: "",
@@ -52,7 +55,7 @@ export default function AdoptionForm() {
 
     // ID del animal (lo pasas por state)
     animalId: "",
-    observations:""
+    observations: "",
   };
 
   const { formValues, InputChange } = useForm<AdoptionFormData>(initialForm);
@@ -70,7 +73,7 @@ export default function AdoptionForm() {
     const payload = {
       veterinarianName: formValues.veterinarianName,
       veterinarianPhone: formValues.veterinarianPhone,
-      animalId: "3a4920dd-f5b2-4b3b-8aac-6135f2e49ef0",
+      animalId: animal.id,
       ownHome,
       acceptsVisits,
       commitmentToSterilization,
@@ -106,9 +109,6 @@ export default function AdoptionForm() {
       console.error("Error enviando solicitud", error);
     }
   };
-
-  const { state } = useLocation();
-  const animal = state?.animal || {};
 
   useEffect(() => {
     window.scrollTo(0, 0);

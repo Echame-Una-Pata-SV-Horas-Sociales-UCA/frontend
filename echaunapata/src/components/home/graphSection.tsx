@@ -24,13 +24,6 @@ interface ImpactData {
   perrosAdoptados: number;
 }
 
-interface ImpactData {
-  perrosEnSantuario: number;
-  padrinosGlobales: number;
-  rescatesPorAno: Record<string, number>;
-  perrosAdoptados: number;
-}
-
 export default function ImpactSection() {
   const [impactData, setImpactData] = useState<ImpactData>({
     perrosEnSantuario: 0,

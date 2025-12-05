@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
 import CambioSection from "../components/adopta/CambioSection.tsx";
@@ -65,10 +65,6 @@ export default function AdoptionForm() {
   >(null);
 
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const validateForm = () => {
     if (formValues.firstNames.trim().length < 2)
@@ -157,17 +153,14 @@ export default function AdoptionForm() {
       setAcceptsVisits(null);
       setCommitmentToSterilization(null);
       setCommitmentToSendPhotos(null);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-      notifyError(error.message);
+      const message = error instanceof Error ? error.message : String(error);
+      notifyError(message);
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <>

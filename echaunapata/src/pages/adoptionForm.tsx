@@ -50,7 +50,6 @@ export default function AdoptionForm() {
     ref2_phone: "",
     observations: "",
     animalId: "",
-    observations: "",
   };
 
   const { formValues, InputChange, resetForm } =
@@ -64,9 +63,6 @@ export default function AdoptionForm() {
     useState<boolean | null>(null);
 
   const [loading, setLoading] = useState(false);
-
-  const { state } = useLocation();
-  const animal = state?.animal || {};
 
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { FindMetrics } from "../../service/DashboardService";
+import { useState } from "react";
+// FindMetrics kept for possible re-enable in the future; commented out to avoid unused-import errors
+// import { FindMetrics } from "../../service/DashboardService";
 import {
   RadialBarChart,
   RadialBar,
@@ -12,8 +13,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  LineChart,
-  Line,
 } from "recharts";
 import Iconloader from "../commons/loadIcon";
 
@@ -25,34 +24,34 @@ interface ImpactData {
 }
 
 export default function ImpactSection() {
-  const [impactData, setImpactData] = useState<ImpactData>({
-    perrosEnSantuario: 0,
-    padrinosGlobales: 0,
-    rescatesPorAno: {},
-    perrosAdoptados: 0,
+  const [impactData] = useState<ImpactData>({
+    perrosEnSantuario: 155,
+    padrinosGlobales: 40,
+    rescatesPorAno: {"2024": 150, "2025": 200 },
+    perrosAdoptados: 380,
   });
 
-  const [loading, setLoading] = useState(true);
+  const [loading] = useState(false);
 
   const PRIMARY = "#2D6FF7";
   const PRIMARY_LIGHT = "#B0D0FF";
   const TEXT = "#1A1A1A";
 
-  useEffect(() => {
-    const fetchMetrics = async () => {
-      try {
-        setLoading(true)
-        const data = await FindMetrics();
-        setImpactData(data.data);
-      } catch (error) {
-        console.error("Error al traer métricas:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchMetrics = async () => {
+  //     try {
+  //       setLoading(true)
+  //       const data = await FindMetrics();
+  //       setImpactData(data.data);
+  //     } catch (error) {
+  //       console.error("Error al traer métricas:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchMetrics();
-  }, []);
+  //   fetchMetrics();
+  // }, []);
 
   // if (loading) {
     
@@ -85,14 +84,9 @@ export default function ImpactSection() {
     0
   );
 
-  const sparkData = [
-    { month: "Ene", value: impactData.padrinosGlobales },
-    { month: "Feb", value: impactData.padrinosGlobales },
-    { month: "Mar", value: impactData.padrinosGlobales },
-    { month: "Abr", value: impactData.padrinosGlobales },
-    { month: "May", value: impactData.padrinosGlobales },
-    { month: "Jun", value: impactData.padrinosGlobales },
-  ];
+  // Number of years shown in the bar chart and average rescues per year
+  const yearsCount = barData.length;
+  const avgRescues = yearsCount > 0 ? Math.round(totalRescues / yearsCount) : 0;
 
   return (
     <section className="w-full py-20 bg-white">
@@ -150,7 +144,8 @@ export default function ImpactSection() {
           <p className="text-4xl font-bold text-[#1A1A1A] mt-2">
             +{totalRescues}
           </p>
-          <p className="text-gray-600">Perros rescatados en el año</p>
+          <p className="text-gray-600">Total rescatados (en {yearsCount} {yearsCount !== 1 ? "años" : "año"} mostrados)</p>
+          <p className="text-gray-600">Promedio: {avgRescues} por año</p>
         </div>
 
         {/* CARD 3 – DONUT */}
@@ -182,30 +177,18 @@ export default function ImpactSection() {
           <p className="text-gray-600">Entregados en adopción</p>
         </div>
 
-        {/* CARD 4 – SPARKLINE */}
+        {/* CARD 4 – Padrinos: KPI badge aligned with neighbor */}
         <div className="p-8 bg-[#F5F5F5] rounded-2xl shadow-sm flex flex-col items-center">
-          <h3 className="font-bold mb-4 text-lg text-[#1A1A1A]">
-            Padrinos Globales
-          </h3>
+          <h3 className="font-bold mb-4 text-lg text-[#1A1A1A]">Padrinos Globales</h3>
 
-          <div className="w-full h-40">
-            <ResponsiveContainer>
-              <LineChart data={sparkData}>
-                <Tooltip />
-                <Line
-                  type="monotone"
-                  dataKey="value"
-                  stroke={PRIMARY}
-                  strokeWidth={3}
-                  dot={false}
-                />
-              </LineChart>
-            </ResponsiveContainer>
+          <div className="w-64 h-64 relative">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-36 h-36 rounded-full bg-gradient-to-r from-[#2D6FF7] to-[#B0D0FF] flex items-center justify-center text-white text-4xl font-bold shadow-md">
+                +{impactData.padrinosGlobales}
+              </div>
+            </div>
           </div>
 
-          <p className="text-4xl font-bold text-[#1A1A1A]">
-            +{impactData.padrinosGlobales}
-          </p>
           <p className="text-gray-600">Padrinos alrededor del mundo</p>
         </div>
       </div>

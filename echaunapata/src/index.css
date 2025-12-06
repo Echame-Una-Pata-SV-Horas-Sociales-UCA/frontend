@@ -6,3 +6,56 @@
 .animate-slide {
   animation: slide 0.3s ease-out;
 }
+
+/* --- ANIMACIONES GLOBALES --- */
+
+/* Slide-up */
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.animate-slideUp {
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+/* Pulso suave */
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.35; }
+  50% { transform: scale(1.15); opacity: 0.15; }
+  100% { transform: scale(0.95); opacity: 0.35; }
+}
+.pulse-circle {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(45, 111, 247, 0.35);
+  animation: pulse 2.4s infinite ease-in-out;
+  filter: blur(6px);
+}
+
+/* Radial “Scale In” */
+@keyframes scaleIn {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-scaleIn {
+  animation: scaleIn 0.9s ease-out forwards;
+}
+
+/* Fade-in general */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+/* Glass card */
+.glass-card {
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}

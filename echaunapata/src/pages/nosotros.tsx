@@ -12,7 +12,7 @@ export default function Nosotros() {
   return (
     <>
       <>
-        <Navbar solid={false} />
+        <Navbar CambioSection />
         <Hero>
           <motion.div
           initial={{ opacity: 0, y: -50 }}

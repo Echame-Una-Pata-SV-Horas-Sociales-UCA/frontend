@@ -1,7 +1,5 @@
 import ButtonForms from "../commons/buttonForms";
 import { Link } from "react-router-dom";
-import Lottie from "lottie-react";
-import protectAnimation from "../../assets/animations/heartsAnimation.json";
 
 export default function RequisitoDenuncia() {
   return (

@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 export default function Denuncia() {
   return (
     <>
-      <Navbar solid={false} />
+      <Navbar CambioSection />
 
       {/* HERO RESPONSIVE */}
       <Hero>

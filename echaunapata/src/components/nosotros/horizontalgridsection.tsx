@@ -1,4 +1,4 @@
-import happyDog from '../../assets/homeframe.png';
+import happyDog from '../../assets/img/homeframe.png';
 export default function HorizontalGridSection() {
   return (
     <section className="w-full py-16 px-4 sm:px-8 lg:px-16 bg-white">

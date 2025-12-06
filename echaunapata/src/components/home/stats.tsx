@@ -9,7 +9,7 @@ export default function StatsSection() {
           {/* Header Section */}
           <div className="text-center mb-12">
             <h2 className="text-4xl sm:text-5xl font-bold text-black mb-6">
-              CASA DE <span className="text-red-500">+300</span> PERROS
+              CASA DE <span className="text-[#F23413]">+300</span> PERROS
             </h2>
   
             <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto mb-8">

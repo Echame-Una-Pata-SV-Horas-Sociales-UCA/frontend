@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import happyDog from "../../assets/flecos.png";
+import happyDog from "../../assets/img/perro7.png";
 import { Pets } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { GetAllAnimalsAvailable } from "../../service/AnimalServices";

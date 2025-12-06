@@ -9,6 +9,7 @@ import SupportSection from "../components/home/support";
 import Footer from "../components/commons/footer";
 import Button from "../components/commons/button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -24,11 +25,13 @@ export default function Home() {
          </h1>
  
          <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
-           Durante los últimos 00 años, hemos rescatado, castrado y reubicado a más de 000 perros callejeros.
+           Durante los últimos 10 años, hemos rescatado, castrado y reubicado a más de 1000 perros callejeros.
            Actualmente, albergamos a más de 300 perros que buscan una familia definitiva.
          </p>
  
-         <Button text="¡DONAR!" color="#F23413" />  
+        <Link to="/nosotros">
+         <Button text="Conocé más dobre nosotros" color="#F23413" />  
+        </Link>
        </motion.div>
      </Hero>
      <StatsSection />

@@ -1,4 +1,4 @@
-import happyDog from '../../assets/homeframe.png';
+import happyDog from "../../assets/img/perro7.png";
 
 interface DogsGridProps {
   showGallery?: boolean;

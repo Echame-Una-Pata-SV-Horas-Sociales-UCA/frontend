@@ -1,6 +1,6 @@
 //falta el useEfect
 import { useState } from "react";
-// import { FindMetrics } from "../../service/DashboardService"; // ✅ Descomentar al conectar con la API
+// import { FindMetrics } from "../../service/DashboardService"; //  Descomentar al conectar con la API
 import {
   RadialBarChart,
   RadialBar,
@@ -50,13 +50,12 @@ export default function ImpactSection() {
   const TEXT = "#1A1A1A";
 
   /*
-  // ❌ Comentar cuando usamos datos quemados
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
         setLoading(true);
-        const data = await FindMetrics(); // ✅ Descomentar para usar API
-        setImpactData(data.data);         // ✅ Descomentar para usar API
+        const data = await FindMetrics(); //  Descomentar para usar API
+        setImpactData(data.data);         //  Descomentar para usar API
       } catch (error) {
         console.error("Error al traer métricas:", error);
       } finally {
@@ -91,7 +90,7 @@ export default function ImpactSection() {
   return (
     <section className="w-full py-20 bg-white">
       <h2 className="text-4xl font-bold text-center mb-12 text-[#1A1A1A]">
-        Impacto de <span className="text-[#2D6FF7]">Échame Una Pata SV</span>
+        Nuestro impacto hasta ahora
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 px-6 max-w-6xl mx-auto">

@@ -1,4 +1,4 @@
-import happyDog from '../../assets/homeframe.png';
+import happyDog from '../../assets/img/homeframe.png';
 
 export default function HistoriaSection() {
   return (

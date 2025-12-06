@@ -155,7 +155,7 @@ export default function AdoptionForm() {
 
   return (
     <>
-      <Navbar solid={true} />
+      <Navbar/>
 
       <div className="pt-20 sm:pt-28 px-4">
         <section className="max-w-6xl mx-auto py-10 sm:py-12">

@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <div>
-      <Navbar solid={false} />
+      <Navbar />
       <Hero>
         <motion.div
           initial={{ opacity: 0, y: -50 }}

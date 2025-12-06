@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 export default function Adopta() {
   return (
     <>
-      <Navbar solid={false} />
+      <Navbar />
       <Hero>
         <motion.div
           initial={{ opacity: 0, y: -50 }}

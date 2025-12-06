@@ -8,7 +8,7 @@ type ButtonProps = {
 };
 
 export default function Button({ text, color = "#F23413", to, onClick }: ButtonProps) {
-  const classes = `bg-[${color}] hover:bg-[${color}] text-white font-bold text-lg px-10 py-4 rounded-full transition-all transform hover:scale-105 shadow-lg`;
+  const classes = `bg-[${color}] hover:bg-[${color}] text-white font-bold text-sm md:text-xl md:px-10 px-4 py-4 md:py-6 rounded-full transition-all transform hover:scale-105 shadow-lg cursor-pointer`;
 
   if (to) {
     return (

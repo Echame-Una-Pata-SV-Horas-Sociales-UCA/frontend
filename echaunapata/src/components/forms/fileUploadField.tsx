@@ -1,12 +1,16 @@
 import { CloudUploadOutlined } from "@mui/icons-material";
 import { useRef, useState, useEffect } from "react";
+import { CompressImage } from "../utils/compressImage";
 
 interface FileUploadFieldProps {
   onFileSelect?: (file: File | null) => void;
   file?: File | null;
 }
 
-export default function FileUploadField({ onFileSelect, file }: FileUploadFieldProps) {
+export default function FileUploadField({
+  onFileSelect,
+  file,
+}: FileUploadFieldProps) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -19,9 +23,25 @@ export default function FileUploadField({ onFileSelect, file }: FileUploadFieldP
     }
   }, [file]);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0] || null;
-    if (onFileSelect) onFileSelect(selectedFile);
+    if (!selectedFile) return;
+
+    const validTypes = ["image/jpeg", "image/png"];
+    if (!validTypes.includes(selectedFile.type)) {
+      alert("Solo se permiten imágenes JPG o PNG");
+      e.target.value = "";
+      if (onFileSelect) onFileSelect(null);
+      return;
+    }
+
+    try {
+      const compressedFile = await CompressImage(selectedFile, 1); 
+      if (onFileSelect) onFileSelect(compressedFile);
+    } catch (err:any) {
+      alert("Error al procesar la imagen");
+      if (onFileSelect) onFileSelect(null);
+    }
   };
 
   return (

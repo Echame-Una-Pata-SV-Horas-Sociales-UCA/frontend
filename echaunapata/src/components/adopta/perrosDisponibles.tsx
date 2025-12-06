@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import happyDog from "../../assets/flecos.png";
+import happyDog from "../../assets/img/perro7.png";
 import { Pets } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { GetAllAnimalsAvailable } from "../../service/AnimalServices";
@@ -15,7 +15,6 @@ interface Animal {
   photo?: string;
 }
 
-
 function SkeletonCard() {
   return (
     <div className="w-full border border-gray-300 rounded-2xl overflow-hidden bg-white shadow-md animate-pulse">
@@ -29,11 +28,11 @@ function SkeletonCard() {
   );
 }
 
-
 export default function PerrosDisponibles() {
   const [perros, setPerros] = useState<Animal[]>([]);
   const [loading, setLoading] = useState(true);
-  const [visibleCount, setVisibleCount] = useState(6); // mostrar inicialmente 6
+  const [visibleCount, setVisibleCount] = useState(6);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
     const fetchAnimals = async () => {
@@ -51,9 +50,17 @@ export default function PerrosDisponibles() {
     fetchAnimals();
   }, []);
 
-  const handleShowMore = () => {
-    setVisibleCount((prev) => prev + 6); // mostrar 6 más cada vez
+  const handleShowMore = async () => {
+    setLoadingMore(true);
+
+    // Simula un pequeño delay de carga
+    setTimeout(() => {
+      setVisibleCount((prev) => prev + 6);
+      setLoadingMore(false);
+    }, 800);
   };
+
+  const visiblePerros = perros.slice(0, visibleCount);
 
   return (
     <section className="w-full py-16 px-4 sm:px-8 lg:px-16 bg-white">
@@ -67,11 +74,11 @@ export default function PerrosDisponibles() {
             ? Array.from({ length: 6 }).map((_, idx) => (
                 <SkeletonCard key={idx} />
               ))
-            : perros.slice(0, visibleCount).map((perro, idx) => (
+            : visiblePerros.map((perro, idx) => (
                 <div
                   key={perro.id}
                   className="w-full border border-gray-300 rounded-2xl overflow-hidden bg-white shadow-md transition-opacity duration-500 opacity-0 animate-fadeIn"
-                  style={{ animationDelay: `${idx * 100}ms` }} // efecto en cascada
+                  style={{ animationDelay: `${idx * 40}ms` }}
                 >
                   <div className="w-full h-56 overflow-hidden">
                     <img
@@ -103,9 +110,14 @@ export default function PerrosDisponibles() {
                   </div>
                 </div>
               ))}
+
+          {/* SkeletonCards extra al mostrar más */}
+          {loadingMore &&
+            Array.from({ length: 6 }).map((_, idx) => (
+              <SkeletonCard key={`loading-${idx}`} />
+            ))}
         </div>
 
-        {/* Botón mostrar más */}
         {!loading && visibleCount < perros.length && (
           <div className="flex justify-center mt-12">
             <button
@@ -118,7 +130,6 @@ export default function PerrosDisponibles() {
         )}
       </div>
 
-      {/* Animación fade-in */}
       <style>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(20px); }

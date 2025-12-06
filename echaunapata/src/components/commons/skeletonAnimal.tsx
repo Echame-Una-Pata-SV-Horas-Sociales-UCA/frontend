@@ -1,7 +1,8 @@
 export default function SkeletonAnimal() {
   return (
-    <div className="animate-pulse max-w-6xl mx-auto px-4 sm:px-8 py-10">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <div className="relative animate-pulse max-w-6xl mx-auto px-4 sm:px-8 py-10">
+      {/* Skeleton original */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 relative z-0">
         <div className="flex justify-center lg:justify-start">
           <div className="w-[260px] sm:w-[300px] lg:w-[330px] h-[330px] bg-gray-300 rounded-xl" />
         </div>
@@ -17,7 +18,7 @@ export default function SkeletonAnimal() {
         </div>
       </div>
 
-      <div className="mt-20 flex justify-between items-start divide-x divide-gray-200 gap-6">
+      <div className="mt-20 flex justify-between items-start divide-x divide-gray-200 gap-6 relative z-0">
         {[...Array(4)].map((_, i) => (
           <div
             key={i}
@@ -29,6 +30,9 @@ export default function SkeletonAnimal() {
           </div>
         ))}
       </div>
+      <p className="text-3xl font-bold text-center text-gray-500 animate-pulse mt-12">
+        GUAAU GUAAU .....
+      </p>
     </div>
   );
 }

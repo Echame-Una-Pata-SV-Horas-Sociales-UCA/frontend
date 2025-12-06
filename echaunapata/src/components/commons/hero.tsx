@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import hero from "../../assets/homeframe.png";
+import hero from "../../assets/img/homeframe.png";
 
 interface HeroProps {
   children: ReactNode;
@@ -11,8 +11,11 @@ export default function Hero({ children }: HeroProps) {
       className="
         relative 
         overflow-hidden
-        h-[80vh]           /* mobile */
-        md:min-h-screen    /* desktop */
+
+        h-[65vh]           /* más compacto en móviles */
+        xs:h-[70vh]        /* pantallas pequeñas */
+        sm:h-[75vh]
+        md:min-h-screen
         flex items-center
       "
     >
@@ -27,7 +30,7 @@ export default function Hero({ children }: HeroProps) {
             object-center
           "
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/55" />
       </div>
 
       {/* Content */}
@@ -35,16 +38,43 @@ export default function Hero({ children }: HeroProps) {
         className="
           relative z-10
           w-full
-          max-w-[95%]          /* evita overflow */
+          max-w-[90%]
           mx-auto
-          
-          px-6 sm:px-10 lg:px-20  /* ← MÁS PADDING IZQUIERDO */
-                               /* mobile   tablet    desktop */
 
-          text-center md:text-left /* centrado en mobile, izquierda en desktop */
+          px-4 sm:px-8 md:px-16
+          text-center md:text-left
+
+          flex flex-col gap-2 sm:gap-4
         "
       >
-        {children}
+        <div
+          className="
+            text-white space-y-2 sm:space-y-4
+
+            /* h1 responsive MUY agresivo */
+            [&>h1]:text-2xl
+            [&>h1]:xs:text-3xl 
+            [&>h1]:sm:text-4xl 
+            [&>h1]:md:text-6xl
+            [&>h1]:font-bold 
+            [&>h1]:leading-tight
+
+            /* párrafo */
+            [&>p]:text-xs
+            [&>p]:xs:text-sm
+            [&>p]:sm:text-base
+            [&>p]:md:text-lg
+
+            /* botón dentro del children */
+            [&>a]:py-2
+            [&>a]:px-4
+            [&>a]:text-xs
+            [&>a]:xs:text-sm
+            [&>a]:sm:text-base
+          "
+        >
+          {children}
+        </div>
       </div>
     </section>
   );

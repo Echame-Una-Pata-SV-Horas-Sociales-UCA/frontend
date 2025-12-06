@@ -65,7 +65,7 @@ export default function DenunciaForm() {
 
   return (
     <>
-      <Navbar solid={true} />
+      <Navbar />
 
       <div className="pt-28">
         <section className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-12">

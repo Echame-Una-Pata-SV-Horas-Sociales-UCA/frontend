@@ -81,16 +81,6 @@ export default function AdoptionForm() {
       return notifyError("La dirección es obligatoria");
     if (!formValues.city.trim()) return notifyError("La ciudad es obligatoria");
 
-    if (!formValues.ref1_name.trim())
-      return notifyError("Ingrese la primera referencia");
-    if (!/^\d{8,}$/.test(formValues.ref1_phone))
-      return notifyError("Teléfono de referencia 1 inválido");
-
-    if (!formValues.ref2_name.trim())
-      return notifyError("Ingrese la segunda referencia");
-    if (!/^\d{8,}$/.test(formValues.ref2_phone))
-      return notifyError("Teléfono de referencia 2 inválido");
-
     if (ownHome === null)
       return notifyError("Debe indicar si dispone de hogar propio");
     if (acceptsVisits === null)

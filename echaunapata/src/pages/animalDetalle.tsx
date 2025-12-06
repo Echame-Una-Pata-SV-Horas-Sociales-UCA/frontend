@@ -15,24 +15,17 @@ import SkeletonAnimal from "../components/commons/skeletonAnimal";
 
 export interface Animal {
   id: string;
-
   name: string;
   species: string;
   state: string;
   sex: string;
-
   race?: string;
   age: string | number | null;
-
   initialDescription?: string;
-
   sterilized: boolean;
   missingLimb: boolean;
-
   photo?: string;
-
   rescueLocation?: string;
-
   createdAt?: string;
   updatedAt?: string;
 }
@@ -41,11 +34,10 @@ export default function AnimalDetalle() {
   const { id } = useParams();
   const [animal, setAnimal] = useState<Animal | null>(null);
 
-  // FETCH ANIMAL BY ID
   useEffect(() => {
     const fetchAnimal = async () => {
       try {
-        const res = await GetAnimalById(id!); // backend devuelve { message, data }
+        const res = await GetAnimalById(id!);
         setAnimal(res.data);
       } catch (error) {
         console.error("Error cargando animal:", error);
@@ -91,63 +83,98 @@ export default function AnimalDetalle() {
       <Navbar solid={true} />
 
       <div className="pt-20 sm:pt-24 md:pt-28">
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8 md:py-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
-            <div className="flex justify-center lg:justify-start">
+
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-10">
+
+          {/* GRID PRINCIPAL */}
+          <div className="
+            grid grid-cols-1 lg:grid-cols-2 
+            gap-10 sm:gap-12
+            text-center lg:text-left
+            items-center
+          ">
+
+            {/* Imagen */}
+            <div className="flex justify-center">
               <img
                 src={animal.photo || flecosPhoto}
                 alt={animal.name}
-                className="w-full max-w-[260px] sm:max-w-[300px] md:max-w-[330px] lg:w-[330px] rounded-xl object-cover shadow-lg"
+                className="
+                  w-full max-w-[260px] sm:max-w-[300px] md:max-w-[330px]
+                  rounded-xl object-cover shadow-lg
+                "
               />
             </div>
 
-            <div className="flex flex-col justify-center">
-              <span className="bg-blue-500 text-white text-xs font-bold px-3 sm:px-4 py-1 rounded-full w-max mb-3 sm:mb-4">
+            {/* Información */}
+            <div className="flex flex-col justify-center items-center lg:items-start">
+
+              <span className="
+                bg-blue-500 text-white text-xs font-bold 
+                px-4 py-1 rounded-full 
+                w-max mb-4
+              ">
                 {animal.sex || "SIN SEXO"}
               </span>
 
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-2">
+              <h1 className="text-3xl sm:text-4xl font-extrabold mb-2">
                 {animal.name}
               </h1>
 
               <p className="text-gray-700 text-base sm:text-lg mb-1">
-                {"Refugio Echa Una Patita"}
+                Refugio Échame Una Patita
               </p>
-              <p className="text-gray-700 text-base sm:text-lg mb-4 sm:mb-6">
+
+              <p className="text-gray-700 text-base sm:text-lg mb-6">
                 {animal.age || "Sin edad"}
               </p>
 
-              <h2 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">
+              <h2 className="text-xl font-bold mb-3">
                 Acerca de {animal.name}
               </h2>
 
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
+              <p className="
+                text-gray-600 text-sm sm:text-base 
+                leading-relaxed mb-8 max-w-lg
+              ">
                 {animal.initialDescription ||
                   "Este animal aún no tiene descripción completa. Pronto se actualizará su información."}
               </p>
 
-              <Link to="/adoption-form" state={{ animal }}>
+              <Link to="/adoption-form" state={{ animal }} className="w-full max-w-sm">
                 <ButtonForms
                   text="LLENAR SOLICITUD DE ADOPCIÓN"
                   className="w-full text-sm sm:text-base"
                 />
               </Link>
+
             </div>
           </div>
 
-          <div className="mt-12 sm:mt-16 md:mt-20">
-            <h3 className="text-lg sm:text-xl font-bold mb-6 sm:mb-8 md:mb-10">
+          {/* DETALLES */}
+          <div className="mt-16">
+            <h3 className="text-xl sm:text-2xl font-bold mb-10 text-center lg:text-left">
               Más detalles de {animal.name}
             </h3>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+          <div className="
+              grid 
+              grid-cols-1         
+              sm:grid-cols-2      
+              md:grid-cols-4       
+              gap-6 sm:gap-8 
+              text-center
+            ">
               {details.map((detail, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center text-center px-2 sm:px-4 md:px-6 gap-2 sm:gap-3"
+                  className="flex flex-col items-center px-2 gap-3"
                 >
                   <div
-                    className={`${detail.bg} w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center`}
+                    className={`${detail.bg} 
+                      w-12 h-12 sm:w-14 sm:h-14 
+                      rounded-full flex items-center justify-center
+                    `}
                   >
                     {detail.icon}
                   </div>
@@ -160,6 +187,7 @@ export default function AnimalDetalle() {
               ))}
             </div>
           </div>
+
         </section>
 
         <Footer />

@@ -10,6 +10,7 @@ import ButtonForms from "../components/commons/buttonForms";
 import { useForm } from "../hooks/useForm.ts";
 import { CreateAdoption } from "../service/AdoptionService";
 import { notifyError, notifySuccess } from "../components/utils/toastUtils";
+import { DownloadPDF } from "../components/utils/downloadPDF.ts";
 
 interface AdoptionFormData {
   firstNames: string;
@@ -137,6 +138,7 @@ export default function AdoptionForm() {
       await CreateAdoption(payload);
       notifySuccess("Solicitud enviada con éxito");
 
+      DownloadPDF();
       resetForm();
       setOwnHome(null);
       setAcceptsVisits(null);
@@ -153,7 +155,7 @@ export default function AdoptionForm() {
 
   return (
     <>
-      <Navbar solid={true} />
+      <Navbar/>
 
       <div className="pt-20 sm:pt-28 px-4">
         <section className="max-w-6xl mx-auto py-10 sm:py-12">
@@ -315,15 +317,23 @@ export default function AdoptionForm() {
             </ExpandableSection>
 
             {/* OBSERVACIONES */}
-            <div className="w-full max-w-3xl">
-              <ObservationsField
-                title="Observaciones *"
-                description="Incluye cualquier detalle relevante para evaluar tu solicitud."
-                name="observations"
-                value={formValues.observations}
-                onChange={InputChange}
-              />
-            </div>
+            <ExpandableSection title="Observaciones">
+              <div className="w-full max-w-3xl">
+                <ObservationsField
+                  title="Observaciones *"
+                  description="Incluye cualquier detalle relevante para evaluar tu solicitud."
+                  name="observations"
+                  value={formValues.observations}
+                  onChange={InputChange}
+                />
+              </div>
+            </ExpandableSection>
+            <p className="text-center text-gray-700 mb-4 w-1/2">
+              Al darle clic en <strong>ENVIAR</strong>, tu solicitud será
+              enviada y automáticamente se descargará el PDF correspondiente.
+              Tienes <strong>24 horas</strong> para enviar el PDF al correo:{" "}
+              <strong>adopciones@refugio.com</strong>.
+            </p>
 
             {/* BOTÓN */}
             <ButtonForms
@@ -334,7 +344,6 @@ export default function AdoptionForm() {
             />
           </div>
         </section>
-
 
         <Footer />
       </div>

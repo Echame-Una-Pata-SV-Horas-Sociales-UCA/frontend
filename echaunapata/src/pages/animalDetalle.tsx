@@ -80,7 +80,7 @@ export default function AnimalDetalle() {
 
   return (
     <>
-      <Navbar solid={true} />
+      <Navbar />
 
       <div className="pt-20 sm:pt-24 md:pt-28">
 

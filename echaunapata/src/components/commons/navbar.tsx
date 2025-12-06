@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo/homelogo.png";
 
@@ -8,18 +8,52 @@ interface NavbarProps {
 
 export default function Navbar({ solid = false }: NavbarProps) {
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [lastScroll, setLastScroll] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const current = window.scrollY;
+
+      // Detecta si bajó suficiente para volverse sólido
+      setScrolled(current > 60);
+
+      // Solo Desktop
+      if (window.innerWidth >= 1024) {
+        if (current > lastScroll && current > 80) {
+          // Bajando → ocultar
+          setHidden(true);
+        } else {
+          // Subiendo → mostrar
+          setHidden(false);
+        }
+      }
+
+      setLastScroll(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScroll]);
 
   return (
     <nav
-  className={`
-    fixed top-0 left-0 right-0 z-50
-    ${solid
-      ? "bg-black shadow-sm"
-      : "bg-black lg:bg-black/40 lg:backdrop-blur-sm"
-    }
-  `}
->
+      className={`
+        fixed left-0 right-0 z-50
+        transition-transform duration-300 ease-out
 
+        ${hidden ? "-translate-y-full" : "translate-y-0"}
+
+        ${
+          solid
+            ? "bg-black shadow-sm"
+            : scrolled
+              ? "bg-black shadow-sm"   /* NAVBAR NEGRO AL BAJAR */
+              : "bg-black lg:bg-black/40 lg:backdrop-blur-sm"
+        }
+      `}
+    >
       {/* NAVBAR CONTENT */}
       <div className="w-full px-4 sm:px-6 py-4">
         <div className="flex items-center justify-between w-full">
@@ -29,7 +63,7 @@ export default function Navbar({ solid = false }: NavbarProps) {
             <img src={logo} alt="logo" className="w-20" />
           </Link>
 
-          {/* -------- DESKTOP MENU (LG+) -------- */}
+          {/* DESKTOP MENU */}
           <div className="hidden lg:flex items-center gap-8">
             <Link to="/refugio" className="text-white hover:text-gray-300">Refugio</Link>
             <Link to="/nosotros" className="text-white hover:text-gray-300">Nosotros</Link>
@@ -38,14 +72,17 @@ export default function Navbar({ solid = false }: NavbarProps) {
             <Link to="/denuncia" className="text-white hover:text-gray-300">Denuncia</Link>
           </div>
 
-          {/* Desktop Donate */}
+          {/* DESKTOP DONATE */}
           <div className="hidden lg:flex">
-            <Link to="/apadrina" className="border-2 border-white text-white px-6 py-2 rounded-full hover:bg-white hover:text-black transition-all font-semibold">
+            <Link
+              to="/apadrina"
+              className="border-2 border-white text-white px-6 py-2 rounded-full hover:bg-white hover:text-black transition-all font-semibold"
+            >
               ¡Donar!
             </Link>
           </div>
 
-          {/* -------- HAMBURGER MENU (< 1024px) -------- */}
+          {/* HAMBURGER */}
           <button
             className="lg:hidden text-white focus:outline-none"
             onClick={() => setOpen(true)}
@@ -64,7 +101,7 @@ export default function Navbar({ solid = false }: NavbarProps) {
         </div>
       </div>
 
-      {/* -------- FULL SCREEN OVERLAY (MOBILE/TABLET) -------- */}
+      {/* OVERLAY */}
       {open && (
         <div
           className="fixed inset-0 bg-black z-[60] lg:hidden"
@@ -72,10 +109,10 @@ export default function Navbar({ solid = false }: NavbarProps) {
         />
       )}
 
-      {/* -------- MOBILE/TABLET MENU PANEL -------- */}
+      {/* MOBILE MENU */}
       <div
         className={`
-          fixed inset-0 
+          fixed inset-0
           bg-black text-white
           z-[70] shadow-xl
           transform transition-transform duration-300
@@ -83,11 +120,13 @@ export default function Navbar({ solid = false }: NavbarProps) {
           lg:hidden
         `}
       >
-        {/* CLOSE BUTTON */}
+        {/* CLOSE */}
         <div className="flex justify-end p-6">
           <button onClick={() => setOpen(false)}>
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2}
+              viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
@@ -101,9 +140,12 @@ export default function Navbar({ solid = false }: NavbarProps) {
           <Link to="/denuncia" onClick={() => setOpen(false)}>Denuncia</Link>
         </nav>
 
-        {/* DONATE BUTTON */}
+        {/* DONATE */}
         <div className="px-8 mt-10">
-          <Link to="/apadrina" className="w-full block text-center border-2 border-white text-white py-3 rounded-full hover:bg-white hover:text-black transition-all font-semibold">
+          <Link
+            to="/apadrina"
+            className="w-full block text-center border-2 border-white text-white py-3 rounded-full hover:bg-white hover:text-black transition-all font-semibold"
+          >
             ¡Donar!
           </Link>
         </div>

@@ -2,7 +2,6 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
-import CambioSection from "../components/adopta/CambioSection";
 import ButtonForms from "../components/commons/buttonForms";
 import flecosPhoto from "../assets/flecos.png";
 import { GetAnimalById } from "../service/AnimalServices";
@@ -159,7 +158,6 @@ export default function AnimalDetalle() {
           </div>
         </section>
 
-        <CambioSection />
         <Footer />
       </div>
     </>

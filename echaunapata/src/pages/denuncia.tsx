@@ -1,7 +1,7 @@
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
 import Hero from "../components/commons/hero";
-import CambioSection from "../components/adopta/CambioSection";
+import DenunciaSeccion from "../components/denuncia/denunciaSeccion";
 import RequisitoDenuncia from "../components/denuncia/requisitosDenuncia";
 import { motion } from "framer-motion";
 
@@ -54,7 +54,7 @@ export default function Denuncia() {
 
       {/* SECCIÓN DE CAMBIOS */}
       <div className="px-4">
-        <CambioSection />
+        <DenunciaSeccion />
       </div>
 
       <Footer />

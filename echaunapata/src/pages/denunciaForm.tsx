@@ -12,13 +12,21 @@ import { createReport } from "../service/reportService";
 import { notifySuccess, notifyError } from "../components/utils/toastUtils";
 
 export default function DenunciaForm() {
-
-  const { values, photo, setPhoto, handleInputChange, handleRadioBoolean, handleRadioString, reset } = useDenunciaForm();
+  const {
+    values,
+    photo,
+    setPhoto,
+    handleInputChange,
+    handleRadioBoolean,
+    handleRadioString,
+    reset,
+  } = useDenunciaForm();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
     if (!values.type) return notifyError("Seleccione el tipo de denuncia");
-    if (!values.description) return notifyError("La descripción es obligatoria");
+    if (!values.description)
+      return notifyError("La descripción es obligatoria");
     if (!photo) return notifyError("Debe subir una evidencia (imagen)");
 
     setLoading(true);
@@ -61,7 +69,6 @@ export default function DenunciaForm() {
 
       <div className="pt-28">
         <section className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-12">
-
           {/* TITULO */}
           <h1 className="text-3xl sm:text-4xl font-bold text-center mb-2">
             FICHA DE DENUNCIA
@@ -72,7 +79,6 @@ export default function DenunciaForm() {
           </p>
 
           <div className="gap-6 flex flex-col items-center w-full">
-
             {/* SECCIÓN 1 */}
             <ExpandableSection title="Datos de identificación y contacto del denunciante (opcional)">
               <CommitmentField
@@ -113,6 +119,7 @@ export default function DenunciaForm() {
                   name="contactEmail"
                   value={values.contactEmail}
                   onChange={handleInputChange}
+                  disabled={values.isAnonymous}
                 />
 
                 <InputField
@@ -121,6 +128,7 @@ export default function DenunciaForm() {
                   name="contactPhone"
                   value={values.contactPhone}
                   onChange={handleInputChange}
+                  disabled={values.isAnonymous}
                 />
               </div>
             </ExpandableSection>
@@ -128,7 +136,6 @@ export default function DenunciaForm() {
             {/* SECCIÓN 3 */}
             <ExpandableSection title="Tipo de denuncia">
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-4 gap-4 sm:gap-0">
-
                 <p className="text-gray-800 font-medium">Tipo de denuncia</p>
 
                 <div className="flex gap-8 sm:gap-10">
@@ -203,7 +210,6 @@ export default function DenunciaForm() {
               className="w-full sm:w-80"
               onClick={handleSubmit}
             />
-
           </div>
         </section>
 

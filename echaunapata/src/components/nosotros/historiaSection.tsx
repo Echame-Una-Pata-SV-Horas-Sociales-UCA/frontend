@@ -1,4 +1,4 @@
-import happyDog from '../../assets/img/homeframe.png';
+import historiaDog from '../../assets/img/perro5.png';
 
 export default function HistoriaSection() {
   return (
@@ -28,7 +28,7 @@ export default function HistoriaSection() {
         {/* Imagen derecha */}
         <div className="w-full h-[260px] sm:h-[300px] lg:h-[340px] overflow-hidden">
           <img 
-            src={happyDog} 
+            src={historiaDog} 
             alt="Perro historia"
             className="w-full h-full object-cover"
           />

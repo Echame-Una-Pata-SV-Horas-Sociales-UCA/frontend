@@ -1,10 +1,10 @@
-import happyDog from '../../assets/homeframe.png';
+import bannerDog from '../../assets/img/homeframe.png';
 export default function CTASection() {
     return (
       <section
         className="relative w-full h-96 flex items-center justify-center bg-cover bg-center"
         style={{
-          backgroundImage: `url(${happyDog})`,
+          backgroundImage: `url(${bannerDog})`,
         }}
       >
         {/* Overlay oscuro */}

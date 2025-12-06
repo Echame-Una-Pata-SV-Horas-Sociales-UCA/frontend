@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/homelogo.png";
+import logo from "../../assets/logo/homelogo.png";
 
 interface NavbarProps {
   solid?: boolean;

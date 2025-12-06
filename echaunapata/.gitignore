@@ -17,6 +17,7 @@ lerna-debug.log*
 # OS generated files
 .DS_Store
 Thumbs.db
+
 .AppleDouble/
 .LSOverride
 Desktop.ini
@@ -26,16 +27,68 @@ $RECYCLE.BIN/
 .vscode/
 !.vscode/extensions.json
 .idea/
+
 .history/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
 *.iml
 
 # TypeScript
 *.tsbuildinfo
+
+# Vite
+.vite/
+
+# Coverage
+coverage/
+
+# Misc
+.env*
+.env.*.local
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# VSCode
+.history/
+
+# npm
+package-lock.json
+
+# yarn
+yarn.lock
+
+# pnpm
+pnpm-lock.yaml
+
+# Mac system files
+.AppleDouble/
+.LSOverride
+
+# Windows system files
+Desktop.ini
+$RECYCLE.BIN/
+
+# React Native
+.expo/
+
+# Optional: Uncomment if you use storybook
+# .storybook-static/
+
+# Optional: Uncomment if you use Cypress
+# cypress/videos/
+# cypress/screenshots/
+
+# Optional: Uncomment if you use Playwright
+# test-results/
+# playwright-report/
+
+# End of file
 
 # Coverage
 coverage/

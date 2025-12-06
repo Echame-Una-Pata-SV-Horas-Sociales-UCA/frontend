@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
 import ButtonForms from "../components/commons/buttonForms";
-import flecosPhoto from "../assets/flecos.png";
+import flecosPhoto from "../assets/img/perro7.png";
 import { GetAnimalById } from "../service/AnimalServices";
 import {
   CrueltyFree,

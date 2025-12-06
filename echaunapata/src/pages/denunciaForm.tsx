@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
-import CambioSection from "../components/adopta/CambioSection";
 import ExpandableSection from "../components/forms/expandableSection";
 import InputField from "../components/forms/inputField";
 import CommitmentField from "../components/forms/commitmentField";
@@ -208,7 +207,6 @@ export default function DenunciaForm() {
           </div>
         </section>
 
-        <CambioSection />
         <Footer />
       </div>
     </>

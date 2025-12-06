@@ -2,181 +2,115 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo/homelogo.png";
 
-interface NavbarProps {
-  solid?: boolean;
-}
-
-export default function Navbar({ solid = false }: NavbarProps) {
+export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const lastScrollRef = useRef(0);
-
-  useEffect(() => {
-    const updateIsMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    updateIsMobile();
-    window.addEventListener("resize", updateIsMobile);
-    return () => window.removeEventListener("resize", updateIsMobile);
-  }, []);
+  const [hidden, setHidden] = useState(false);
+  const lastScroll = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const current = window.scrollY;
-      setScrolled(current > 60);
+      const y = window.scrollY;
+      const isDesktop = window.innerWidth >= 1024;
 
-      if (!isMobile) {
-        if (current > lastScrollRef.current && current > 80) {
-          setHidden(true);
-        } else {
-          setHidden(false);
-        }
+      setScrolled(y > 60);
+
+      if (isDesktop) {
+        if (y > lastScroll.current && y > 80) setHidden(true);
+        else setHidden(false);
       } else {
         setHidden(false);
       }
 
-      lastScrollRef.current = current;
+      lastScroll.current = y;
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isMobile]);
+  }, []);
 
-  const desktopBg = scrolled
-    ? "lg:bg-black lg:shadow-sm"
+  const navBg = scrolled
+    ? "lg:bg-black lg:shadow-md"
     : "lg:bg-black/40 lg:backdrop-blur-sm";
 
-  const colorClasses = solid ? "bg-black shadow-sm" : `bg-black ${desktopBg}`;
-
   return (
-    <nav
-      style={isMobile ? { backgroundColor: "#000000" } : undefined}
-      className={`
-        fixed left-0 right-0 z-50
-        transition-transform duration-300 ease-out
-        ${hidden ? "lg:-translate-y-full" : "translate-y-0"}
-        ${colorClasses}
-      `}
-    >
-      <div className="w-full px-4 sm:px-6 py-4">
-        <div className="flex items-center justify-between w-full">
-          <Link to="/" className="flex items-center">
+    <>
+      <nav
+        className={`
+          fixed top-0 left-0 right-0 z-50
+          transition-all duration-300
+          ${hidden ? "lg:-translate-y-full" : "translate-y-0"}
+          bg-black ${navBg}
+        `}
+      >
+        <div className="px-4 py-4 flex justify-between items-center">
+          <Link to="/">
             <img src={logo} alt="logo" className="w-20" />
           </Link>
 
-          <div className="hidden lg:flex items-center gap-8">
-            <Link to="/refugio" className="text-white hover:text-gray-300">
-              Refugio
-            </Link>
-            <Link to="/nosotros" className="text-white hover:text-gray-300">
-              Nosotros
-            </Link>
-            <Link to="/adopta" className="text-white hover:text-gray-300">
-              Adopta
-            </Link>
-            <Link to="/apadrina" className="text-white hover:text-gray-300">
-              Donacion
-            </Link>
-            <Link to="/denuncia" className="text-white hover:text-gray-300">
-              Denuncia
-            </Link>
+          <div className="hidden lg:flex items-center gap-8 text-white">
+            <Link to="/refugio">Refugio</Link>
+            <Link to="/nosotros">Nosotros</Link>
+            <Link to="/adopta">Adopta</Link>
+            <Link to="/apadrina">Donacion</Link>
+            <Link to="/denuncia">Denuncia</Link>
           </div>
 
-          <div className="hidden lg:flex">
+          <div className="hidden lg:block">
             <Link
               to="/apadrina"
-              className="border-2 border-white text-white px-6 py-2 rounded-full hover:bg-white hover:text-black transition-all font-semibold"
+              className="border-2 border-white px-6 py-2 rounded-full text-white hover:bg-white hover:text-black transition"
             >
               ¡Donar!
             </Link>
           </div>
 
           <button
-            className="lg:hidden text-white focus:outline-none"
+            className="lg:hidden text-white"
             onClick={() => setOpen(true)}
           >
-            <svg
-              className="w-7 h-7"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
         </div>
-      </div>
-
-      {open && (
-        <div
-          className="fixed inset-0 bg-black z-[60] lg:hidden"
-          onClick={() => setOpen(false)}
-        />
-      )}
+      </nav>
 
       <div
         className={`
-          fixed inset-0
-          bg-black text-white
-          z-[70] shadow-xl
+          fixed top-[80px] left-0 right-0 bottom-0
+          z-40 bg-black text-white
           transform transition-transform duration-300
-          ${open ? "translate-x-0" : "translate-x-full"}
           lg:hidden
+          ${open ? "translate-x-0" : "translate-x-full"}
         `}
       >
         <div className="flex justify-end p-6">
           <button onClick={() => setOpen(false)}>
-            <svg
-              className="w-7 h-7"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
-        <nav className="flex flex-col gap-6 px-8 text-xl mt-4">
-          <Link to="/refugio" onClick={() => setOpen(false)}>
-            Refugio
-          </Link>
-          <Link to="/nosotros" onClick={() => setOpen(false)}>
-            Nosotros
-          </Link>
-          <Link to="/adopta" onClick={() => setOpen(false)}>
-            Adopta
-          </Link>
-          <Link to="/apadrina" onClick={() => setOpen(false)}>
-            Apadrina
-          </Link>
-          <Link to="/denuncia" onClick={() => setOpen(false)}>
-            Denuncia
-          </Link>
-        </nav>
+        <div className="px-8 flex flex-col gap-6 text-xl">
+          <Link to="/refugio" onClick={() => setOpen(false)}>Refugio</Link>
+          <Link to="/nosotros" onClick={() => setOpen(false)}>Nosotros</Link>
+          <Link to="/adopta" onClick={() => setOpen(false)}>Adopta</Link>
+          <Link to="/apadrina" onClick={() => setOpen(false)}>Apadrina</Link>
+          <Link to="/denuncia" onClick={() => setOpen(false)}>Denuncia</Link>
+        </div>
 
         <div className="px-8 mt-10">
           <Link
             to="/apadrina"
-            className="w-full block text-center border-2 border-white text-white py-3 rounded-full hover:bg-white hover:text-black transition-all font-semibold"
+            className="block text-center border-2 border-white py-3 rounded-full hover:bg-white hover:text-black transition"
+            onClick={() => setOpen(false)}
           >
             ¡Donar!
           </Link>
         </div>
       </div>
-    </nav>
+    </>
   );
 }
-1

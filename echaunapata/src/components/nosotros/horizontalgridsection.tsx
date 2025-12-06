@@ -1,4 +1,4 @@
-import perro1 from "../../assets/img/perro1.png";
+import perro1 from "../../assets/img/perro5.png";
 import perro2 from "../../assets/img/perro2.png";
 import perro3 from "../../assets/img/perro3.png";
 import perro4 from "../../assets/img/perro4.png";
@@ -7,7 +7,7 @@ export default function HorizontalGridSection() {
   const gallery = [perro1, perro2, perro3, perro4];
 
   return (
-    <section className="w-full bg-white pt-16 pb-16">
+    <section className="w-full bg-white pt-2 pb-10">
 
       {/* Título y descripción */}
       <div className="max-w-xl mx-auto text-center mb-12 px-4">

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 type ButtonProps = {
   text: string;
@@ -8,18 +8,23 @@ type ButtonProps = {
 };
 
 export default function Button({ text, color = "#F23413", to, onClick }: ButtonProps) {
-  const classes = `bg-[${color}] hover:bg-[${color}] text-white font-bold text-lg px-10 py-4 rounded-full transition-all transform hover:scale-105 shadow-lg`;
+  const classes =
+    "text-white font-semibold text-xs sm:text-sm md:text-base px-4 py-2 rounded-full transition-all hover:scale-105 shadow-md inline-block";
+
+  const styles = {
+    backgroundColor: color,
+  };
 
   if (to) {
     return (
-      <Link to={to} className={classes}>
+      <Link to={to} className={classes} style={styles}>
         {text}
       </Link>
     );
   }
 
   return (
-    <button onClick={onClick} className={classes}>
+    <button onClick={onClick} className={classes} style={styles}>
       {text}
     </button>
   );

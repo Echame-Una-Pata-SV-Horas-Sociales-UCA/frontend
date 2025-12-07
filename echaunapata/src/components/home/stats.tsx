@@ -28,8 +28,6 @@ export default function StatsSection() {
             propia debido a su apariencia, edad o necesidades y tratamientos
             especiales.
           </p>
-
-          <Button text="¡DONAR!" color="#4A1214" to="/apadrina" />
         </div>
 
         {/* Graph Section (ImpactSection) */}

@@ -4,7 +4,7 @@ import Footer from "../components/commons/footer";
 export default function Refugio() {
   return (
     <div>
-      <Navbar solid={false} />
+      <Navbar />
       <div className="min-h-screen pt-20 pb-12 px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold mb-8 text-center">Refugio</h1>

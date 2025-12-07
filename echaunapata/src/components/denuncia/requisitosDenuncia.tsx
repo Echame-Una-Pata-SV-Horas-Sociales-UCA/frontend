@@ -1,15 +1,13 @@
 import ButtonForms from "../commons/buttonForms";
 import { Link } from "react-router-dom";
-import Lottie from "lottie-react";
-import protectAnimation from "../../assets/animations/heartsAnimation.json";
 
 export default function RequisitoDenuncia() {
   return (
     <section className="w-full py-20 px-4 sm:px-10 lg:px-20 bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="w-56 mx-auto mb-8">
-          <Lottie animationData={protectAnimation} loop autoplay />
-        </div>
+{/*           <Lottie animationData={protectAnimation} loop autoplay />
+ */}        </div>
         <h2 className="text-4xl sm:text-5xl font-bold text-black mb-14 uppercase text-center">
           ¿CÓMO PODÉS DENUNCIAR?
         </h2>

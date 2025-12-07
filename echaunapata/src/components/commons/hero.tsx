@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import hero from "../../assets/img/homeframe.png";
+import videoHero from "../../assets/video/videoLanding.mp4";
 
 interface HeroProps {
   children: ReactNode;
@@ -12,46 +12,55 @@ export default function Hero({ children }: HeroProps) {
         relative 
         overflow-hidden
 
-        h-[65vh]           /* más compacto en móviles */
-        xs:h-[70vh]        /* pantallas pequeñas */
+        h-[65vh]
+        xs:h-[70vh]
         sm:h-[75vh]
         md:min-h-screen
         flex items-center
       "
     >
-      {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <img
-          src={hero}
-          alt="Perros rescatados"
+
+        <video
+          src={videoHero}
+          autoPlay
+          loop
+          muted
+          playsInline
           className="
             w-full h-full 
             object-cover
             object-center
           "
-        />
-        <div className="absolute inset-0 bg-black/55" />
+        >
+
+          {/*
+          <source src='/assets/video/hero-mobile.mp4' media='(max-width: 640px)' />
+          <source src='/assets/video/hero-tablet.mp4' media='(max-width: 1024px)' />
+          <source src='/assets/video/hero-desktop.mp4' media='(min-width: 1025px)' />
+          */}
+
+        </video>
+
+        <div className="absolute inset-0 bg-black/20" />
       </div>
 
-      {/* Content */}
       <div
         className="
           relative z-10
           w-full
           max-w-[90%]
           mx-auto
-
           px-4 sm:px-8 md:px-16
           text-center md:text-left
-
           flex flex-col gap-2 sm:gap-4
+          pt-24 md:pt-40 lg:pt-52
         "
       >
         <div
           className="
             text-white space-y-2 sm:space-y-4
 
-            /* h1 responsive MUY agresivo */
             [&>h1]:text-2xl
             [&>h1]:xs:text-3xl 
             [&>h1]:sm:text-4xl 
@@ -59,13 +68,11 @@ export default function Hero({ children }: HeroProps) {
             [&>h1]:font-bold 
             [&>h1]:leading-tight
 
-            /* párrafo */
             [&>p]:text-xs
             [&>p]:xs:text-sm
             [&>p]:sm:text-base
             [&>p]:md:text-lg
 
-            /* botón dentro del children */
             [&>a]:py-2
             [&>a]:px-4
             [&>a]:text-xs

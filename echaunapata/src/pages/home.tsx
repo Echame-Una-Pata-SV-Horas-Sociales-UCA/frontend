@@ -14,29 +14,30 @@ import { Link } from "react-router-dom";
 export default function Home() {
   return (
     <div>
-      <Navbar solid={false} />
+      <Navbar />
       <Hero>
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-2xl"
+          className="max-w-xl"
         >
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
             ¡El cambio comienza en ti!
           </h1>
 
-          <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
-            Durante los últimos 10 años, hemos rescatado, castrado y reubicado a
-            más de 1000 perros callejeros. Actualmente, albergamos a más de 300
-            perros que buscan una familia definitiva.
+          <p className="text-sm sm:text-base md:text-lg text-white/90 mb-6 leading-relaxed">
+            Durante los últimos 10 años, hemos rescatado, castrado y reubicado a más
+            de 1000 perros callejeros. Actualmente, albergamos a más de 300 perros que
+            buscan una familia definitiva.
           </p>
 
           <Link to="/nosotros">
-            <Button text="Conocé más sobre nosotros" color="#F23413" />
+            <Button text="Conocé sobre nosotros" color="#F23413" />
           </Link>
         </motion.div>
       </Hero>
+
       <StatsSection />
 
       <DogsGrid

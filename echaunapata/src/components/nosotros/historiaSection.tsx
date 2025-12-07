@@ -1,4 +1,4 @@
-import historiaDog from '../../assets/img/dog05.jpg';
+import historiaDog from '../../assets/img/eupLugar.jpeg';
 
 export default function HistoriaSection() {
   return (

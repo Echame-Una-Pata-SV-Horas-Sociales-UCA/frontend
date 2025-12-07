@@ -1,4 +1,3 @@
-import Button from "../commons/button";
 import GraphSection from "./graphSection";
 
 export default function StatsSection() {

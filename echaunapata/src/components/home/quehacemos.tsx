@@ -2,9 +2,8 @@ import {
   HomeOutlined,
   VolunteerActivismOutlined,
   PaidOutlined,
-  MedicalServicesOutlined,
+  MedicalServicesOutlined, PetsRounded
 } from "@mui/icons-material";
-import PetsRounded from "@mui/icons-material/PetsRounded";
 
 export default function QueHacemos() {
   return (

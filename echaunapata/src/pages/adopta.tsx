@@ -19,12 +19,6 @@ export default function Adopta() {
         subtitle="y comenzá una nueva historia"
         align="center"
       >
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col items-center gap-2"
-        />
       </MiniHero>
 
       <RequisitosAdopcion />

@@ -27,7 +27,11 @@ export default function MetodosDonacion() {
           <CardBank
             title="Banco Agrícola"
             account="300-588898-3"
-            extra="Desde USA Agrícola: 3110189991"
+            link="https://www.bancoagricola.com/"
+          />
+          <CardBank
+            title="Desde USA Agrícola"
+            account="3110189991"
             link="https://www.bancoagricola.com/"
           />
           <CardBank
@@ -82,7 +86,13 @@ export default function MetodosDonacion() {
             />
 
             <CardOther
-              title="Zelle / Venmo / CashApp"
+              title="Venmo "
+              email="ECHAMEUNAPATAELSALVADOR@GMAIL.COM"
+              icon={<CreditCard color={accentColor} />}
+              link="https://venmo.com/business/start/"
+            />
+            <CardOther
+              title="Zelle"
               email="ECHAMEUNAPATAELSALVADOR@GMAIL.COM"
               icon={<CreditCard color={accentColor} />}
               link="https://www.zellepay.com/"

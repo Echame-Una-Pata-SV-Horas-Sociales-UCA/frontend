@@ -10,6 +10,7 @@ import Denuncia from './pages/denuncia'
 import DenunciaForm from './pages/denunciaForm'
 import { Toaster } from "react-hot-toast";
 import ScrollToTop from './components/commons/ScrollToTop';
+import HubNetwork from './pages/hubNetwork';
 
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
         <Route path="/adoption-form" element={<AdoptionForm />} />
         <Route path="/denuncia" element={<Denuncia />} />
         <Route path="/denuncia-form" element={<DenunciaForm />} />
+        <Route path="/red-de-apoyo" element={<HubNetwork />} />
+
       </Routes>
     </BrowserRouter>
     </>

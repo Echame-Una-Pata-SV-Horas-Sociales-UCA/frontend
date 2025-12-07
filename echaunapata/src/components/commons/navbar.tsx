@@ -54,6 +54,7 @@ export default function Navbar() {
             <Link to="/adopta">Adopta</Link>
             <Link to="/apadrina">Donacion</Link>
             <Link to="/denuncia">Denuncia</Link>
+            <Link to="/red-de-apoyo">Red de Apoyo</Link>
           </div>
 
           <div className="hidden lg:block">

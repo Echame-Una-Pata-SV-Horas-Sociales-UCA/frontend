@@ -3,7 +3,7 @@ import Footer from "../components/commons/footer";
 import DenunciaSeccion from "../components/denuncia/denunciaSeccion";
 import RequisitoDenuncia from "../components/denuncia/requisitosDenuncia";
 import MiniHero from "../components/commons/miniHero";
-import heroDenuncia from "../assets/img/perro1.png";
+import heroDenuncia from "../assets/img/homeframe.png";
 
 export default function Denuncia() {
   return (

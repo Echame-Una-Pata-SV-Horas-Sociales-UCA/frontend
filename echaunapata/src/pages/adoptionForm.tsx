@@ -123,11 +123,11 @@ export default function AdoptionForm() {
       references: [
         {
           name: formValues.ref1_name,
-          phone: formValues.ref1_phone,
+          phoneNumber: formValues.ref1_phone,
         },
         {
           name: formValues.ref2_name,
-          phone: formValues.ref2_phone,
+          phoneNumber: formValues.ref2_phone,
         },
       ],
 

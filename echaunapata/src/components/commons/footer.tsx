@@ -77,8 +77,8 @@ export default function Footer() {
             <h3 className="text-sm font-bold tracking-wide mb-6">COLABORA</h3>
 
             <ul className="space-y-3">
-              <li><a href="#" className="hover:text-yellow-400 transition-all duration-200">Voluntariado</a></li>
-              <li><a href="#" className="hover:text-yellow-400 transition-all duration-200">Donaciones</a></li>
+              <li><Link to="/voluntarios" className="hover:text-yellow-400 transition-all duration-200">Voluntariado</Link></li>
+              <li><Link to="/apadrina" className="hover:text-yellow-400 transition-all duration-200">Donaciones</Link></li>
             </ul>
           </div>
         </div>

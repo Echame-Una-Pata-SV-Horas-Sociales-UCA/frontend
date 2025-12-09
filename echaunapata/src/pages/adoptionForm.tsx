@@ -5,7 +5,7 @@ import Footer from "../components/commons/footer";
 import ExpandableSection from "../components/forms/expandableSection";
 import InputField from "../components/forms/inputField";
 import CommitmentField from "../components/forms/commitmentField";
-import ObservationsField from "../components/forms/observationsField";
+import ObservationsField from "../components/forms/observationsField.tsx";
 import ButtonForms from "../components/commons/buttonForms";
 import { useForm } from "../hooks/useForm.ts";
 import { CreateAdoption } from "../service/AdoptionService";
@@ -26,7 +26,7 @@ interface AdoptionFormData {
   ref2_phone: string;
   veterinarianName: string;
   veterinarianPhone: string;
-  observations: string;
+  description: string;
   animalId: string;
 }
 
@@ -48,7 +48,7 @@ export default function AdoptionForm() {
     ref1_phone: "",
     ref2_name: "",
     ref2_phone: "",
-    observations: "",
+    description: "",
     animalId: "",
   };
 
@@ -90,7 +90,7 @@ export default function AdoptionForm() {
     if (commitmentToSendPhotos === null)
       return notifyError("Debe aceptar enviar fotos periódicas");
 
-    if (formValues.observations.trim().length < 10)
+    if (formValues.description.trim().length < 10)
       return notifyError("Las observaciones deben tener mínimo 10 caracteres");
 
     return true;
@@ -131,7 +131,7 @@ export default function AdoptionForm() {
         },
       ],
 
-      observations: formValues.observations,
+      description: formValues.description,
     };
 
     try {
@@ -322,8 +322,8 @@ export default function AdoptionForm() {
                 <ObservationsField
                   title="Observaciones *"
                   description="Incluye cualquier detalle relevante para evaluar tu solicitud."
-                  name="observations"
-                  value={formValues.observations}
+                  name="description"
+                  value={formValues.description}
                   onChange={InputChange}
                 />
               </div>

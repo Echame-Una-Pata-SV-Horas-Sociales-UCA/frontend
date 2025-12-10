@@ -2,16 +2,15 @@ import { useState, useEffect } from "react";
 import img10 from "../../assets/voluntarios/ivan.png";
 import img11 from "../../assets/voluntarios/ivan3.webp";
 import img12 from "../../assets/voluntarios/ivan2.png";
+
 export default function HubCarousel() {
-  // Imágenes para el carrusel
   const images = [img10, img11, img12];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 4000); // Cambia cada 4 segundos
-
+    }, 4000);
     return () => clearInterval(interval);
   }, [images.length]);
 
@@ -28,21 +27,24 @@ export default function HubCarousel() {
   };
 
   return (
-    <section className="w-full bg-white py-16 px-6 sm:px-10 lg:px-20">
+    <section className="w-full  py-16 px-6 sm:px-10 lg:px-20">
       <div className="max-w-7xl mx-auto">
+
+        {/* TÍTULO DEL CAROUSEL */}
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#000000] mb-10 text-center">
+          MOMENTOS DE NUESTRA RED DE APOYO
+        </h2>
+
         {/* Carrusel */}
         <div className="relative w-full">
           {/* Imagen principal */}
-          <div className="relative w-full h-[400px] sm:h-[500px] lg:h-[600px] overflow-hidden rounded-lg">
+          <div className="relative w-full h-[400px] sm:h-[500px] lg:h-[600px] overflow-hidden rounded-lg shadow-md">
             <div
               className="flex transition-transform duration-500 ease-in-out h-full"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {images.map((img, index) => (
-                <div
-                  key={index}
-                  className="min-w-full h-full flex-shrink-0"
-                >
+                <div key={index} className="min-w-full h-full flex-shrink-0">
                   <img
                     src={img}
                     alt={`Imagen ${index + 1}`}
@@ -56,7 +58,6 @@ export default function HubCarousel() {
             <button
               onClick={goToPrevious}
               className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 z-10"
-              aria-label="Imagen anterior"
             >
               <svg
                 className="w-6 h-6"
@@ -65,18 +66,13 @@ export default function HubCarousel() {
                 strokeWidth={2}
                 viewBox="0 0 24 24"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 19l-7-7 7-7"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
               </svg>
             </button>
 
             <button
               onClick={goToNext}
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 z-10"
-              aria-label="Siguiente imagen"
             >
               <svg
                 className="w-6 h-6"
@@ -85,11 +81,7 @@ export default function HubCarousel() {
                 strokeWidth={2}
                 viewBox="0 0 24 24"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 5l7 7-7 7"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </button>
           </div>
@@ -105,7 +97,6 @@ export default function HubCarousel() {
                     ? "bg-[#F23413] w-8"
                     : "bg-gray-300 w-2 hover:bg-gray-400"
                 }`}
-                aria-label={`Ir a imagen ${index + 1}`}
               />
             ))}
           </div>
@@ -114,4 +105,3 @@ export default function HubCarousel() {
     </section>
   );
 }
-

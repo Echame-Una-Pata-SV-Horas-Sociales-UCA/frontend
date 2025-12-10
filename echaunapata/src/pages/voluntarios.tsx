@@ -1,22 +1,22 @@
 import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
 import MiniHero from "../components/commons/miniHero";
-import MadreRefugiosSection from "../components/voluntarios/madreRefugiosSection";
+import VoluntariosSection from "../components/voluntarios/voluntariosSection";
 import ColaboradoresSection from "../components/voluntarios/colaboradoresSection";
 import VoluntariosGrid from "../components/voluntarios/voluntariosGrid";
-import NosotrosHero from "../assets/img/nosotrosHero.png";
+import voluntario from "../assets/voluntarios/voluntario.png";
 
 export default function Voluntarios() {
   return (
     <>
       <Navbar />
       <MiniHero
-        media={NosotrosHero}
+        media={voluntario}
         title="Voluntarios"
-        subtitle="El corazón de nuestra organización"
+        subtitle="Nuestros aliados en la misión"
         align="center"
       />
-      <MadreRefugiosSection />
+      <VoluntariosSection />
       <ColaboradoresSection />
       <VoluntariosGrid />
       <Footer />

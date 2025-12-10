@@ -3,7 +3,7 @@ import Footer from "../components/commons/footer";
 import InformacionDonacion from "../components/apadrina/informacionDonacion";
 import MetodosDonacion from "../components/apadrina/metodosDonacion";
 import MiniHero from "../components/commons/miniHero";
-import heroApradrina from "../assets/img/perro1.png";
+import heroApradrina from "../assets/img/apadrina.jpg";
 
 export default function Apadrina() {
   return (
@@ -11,8 +11,8 @@ export default function Apadrina() {
       <Navbar/>
           <MiniHero
               media={heroApradrina}
-              title="  Denunciá y protegé vidas"
-              subtitle="Reportá casos de riesgo y ayudanos a proteger a los peluditos."
+              title="Apadriná un peludito"
+              subtitle="Cambiá su vida para siempre"
               align="center"
             >
             </MiniHero>

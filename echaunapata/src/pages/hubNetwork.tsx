@@ -2,9 +2,9 @@ import Navbar from "../components/commons/navbar";
 import Footer from "../components/commons/footer";
 import MiniHero from "../components/commons/miniHero";
 import MadreRefugiosHubSection from "../components/hubNetwork/madreRefugiosHubSection";
-import ColaboradoresSection from "../components/voluntarios/colaboradoresSection";
-import HubCarousel from "../components/hubNetwork/hubCarousel";
-import heroHubNetwork from "../assets/img/perro1.png";
+/* import ColaboradoresSection from "../components/voluntarios/colaboradoresSection";
+ */import HubCarousel from "../components/hubNetwork/hubCarousel";
+import heroHubNetwork from "../assets/voluntarios/img-3.jpg";
 
 export default function HubNetwork() {
   return (
@@ -17,8 +17,8 @@ export default function HubNetwork() {
         align="center"
       />
       <MadreRefugiosHubSection />
-      <ColaboradoresSection />
-      <HubCarousel />
+{/*       <ColaboradoresSection />
+ */}      <HubCarousel />
       <Footer />
     </>
   );

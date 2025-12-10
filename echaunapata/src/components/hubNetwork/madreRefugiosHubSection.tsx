@@ -1,4 +1,4 @@
-import perro5 from "../../assets/img/perro5.png";
+import heroHubNetwork from "../../assets/img/red.png";
 
 export default function MadreRefugiosHubSection() {
   return (
@@ -23,9 +23,9 @@ export default function MadreRefugiosHubSection() {
           </div>
 
           {/* Imagen */}
-          <div className="w-full h-[300px] sm:h-[400px] lg:h-[500px] overflow-hidden rounded-lg">
+          <div className="w-full h-[300px] sm:h-[400px] lg:h-[500px] overflow-hidden">
             <img
-              src={perro5}
+              src={heroHubNetwork}
               alt="Madre de refugios"
               className="w-full h-full object-cover"
             />

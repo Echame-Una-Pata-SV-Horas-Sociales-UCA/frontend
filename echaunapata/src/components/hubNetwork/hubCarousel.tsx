@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
-import img10 from "../../assets/voluntarios/concentrix.webp";
-import img11 from "../../assets/voluntarios/foundever.jpg";
-import img12 from "../../assets/voluntarios/ugb.webp";
-import img13 from "../../assets/voluntarios/concentrix.webp";
-import img14 from "../../assets/voluntarios/starbucks.jpg";
-
+import img10 from "../../assets/voluntarios/ivan.png";
+import img11 from "../../assets/voluntarios/ivan3.webp";
+import img12 from "../../assets/voluntarios/ivan2.png";
 export default function HubCarousel() {
   // Imágenes para el carrusel
-  const images = [img10, img11, img12, img13, img14];
+  const images = [img10, img11, img12];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {

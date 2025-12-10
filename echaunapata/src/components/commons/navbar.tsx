@@ -55,6 +55,7 @@ export default function Navbar() {
             <Link to="/apadrina">Donacion</Link>
             <Link to="/denuncia">Denuncia</Link>
             <Link to="/red-de-apoyo">Red de Apoyo</Link>
+            <Link to="/voluntarios">Voluntarios</Link>
           </div>
 
           <div className="hidden lg:block">
@@ -100,6 +101,7 @@ export default function Navbar() {
           <Link to="/adopta" onClick={() => setOpen(false)}>Adopta</Link>
           <Link to="/apadrina" onClick={() => setOpen(false)}>Apadrina</Link>
           <Link to="/denuncia" onClick={() => setOpen(false)}>Denuncia</Link>
+          <Link to="/voluntarios" onClick={() => setOpen(false)}>Voluntarios</Link>
         </div>
 
         <div className="px-8 mt-10">

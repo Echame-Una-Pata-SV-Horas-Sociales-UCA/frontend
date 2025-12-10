@@ -4,8 +4,7 @@ import MiniHero from "../components/commons/miniHero";
 import RequisitosAdopcion from "../components/adopta/requisitos";
 import PerrosDisponibles from "../components/adopta/perrosDisponibles";
 import CambioSection from "../components/adopta/CambioSection";
-
-import heroAdopta from "../assets/img/perro5.png"; // TODO: reemplazar img
+import heroAdopta from "../assets/img/adopta.jpg"; 
 
 export default function Adopta() {
   return (
